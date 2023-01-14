@@ -17,12 +17,12 @@ end vgaControllerV1;
 architecture Behavioral of vgaControllerV1 is
 
 constant hpixels : integer := 800; 
-constant vlines : integer := 625; 
+constant vlines : integer := 630; 
 
-constant hbp : integer := 11; --hback porch
+constant hbp : integer := 33; --hback porch
 constant hfp : integer := 784; --hfront porch
 constant vbp : integer := 33; --vback porch
-constant vfp : integer := 615; --vfront porch
+constant vfp : integer := 784; --vfront porch
 										  
 signal hc, vc : std_logic_vector(9 downto 0); --contador vertical y horizontal
 signal clk25 : std_logic; --divisor de reloj para 25M
@@ -75,7 +75,7 @@ begin
 	--visible area is 640 - 480
 	process(hc, videoON)
 	begin 
-		if((hc > 48 and hc < 784 and videoON = '1')) then
+		if((hc > 48 and hc < 800 and videoON = '1')) then
 			red <= "0000";
 			blue <= "0000";
 			green <= "1111";
