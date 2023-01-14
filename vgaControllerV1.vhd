@@ -16,14 +16,14 @@ end vgaControllerV1;
 
 architecture Behavioral of vgaControllerV1 is
 
-constant hpixels : std_logic_vector(9 downto 0) := "1100100000";
-constant vlines : std_logic_vector(9 downto 0)	 := "1000001001";
+constant hpixels : integer := 800; 
+constant vlines : integer := 525; 
 
-constant hbp : std_logic_vector(9 downto 0) := "0010010000";
-constant hfp : std_logic_vector(9 downto 0) := "1100010000";
-constant vbp : std_logic_vector(9 downto 0) := "0000011111";
-constant vfp : std_logic_vector(9 downto 0) := "0111111111";
-
+constant hbp : integer := 11; --hback porch
+constant hfp : integer := 784; --hfront porch
+constant vbp : integer := 33; --vback porch
+constant vfp : integer := 515; --vfront porch
+										  
 signal hc, vc : std_logic_vector(9 downto 0); --contador vertical y horizontal
 signal clk25 : std_logic; --divisor de reloj para 25M
 signal videoON : std_logic; --flag para encender video
@@ -72,14 +72,17 @@ begin
 		end if;
 	end process;
 	
+	--visible area is 640 - 480
 	process(hc, videoON)
 	begin 
-		if((hc > 569 and videoON = '1') or (hc > 356 and hc < 569 and videoON = '1')) then
+		if((hc > 48 and hc < 784 and videoON = '1')) then
 			red <= "1111";
-		elsif((hc > 143 and hc < 356 and videoON = '1') or (hc > 356 and hc < 569 and videoON = '1')) then
-			green <= "1111";
-		elsif((hc > 356) and (hc < 569) and (videoON = '1')) then
 			blue <= "1111";
+			green <= "1111";
+		--elsif((hc > 60 and hc < 100 and videoON = '1') then
+--			green <= "1111";
+--		elsif((hc > 256) and (hc < 450) and (videoON = '1')) then
+--			blue <= "1111";
 		else
 			red <= "0000";
 			green <= "0000";
