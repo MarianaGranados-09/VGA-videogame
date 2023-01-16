@@ -75,7 +75,9 @@ begin
 	end process;
 	
 	--visible area is 640 - 480
-	juego9x9: process(hc, vc, videoON, juego9, juego25)
+		   
+	--3x3 tic tac toe game
+	juego3x3: process(hc, vc, videoON, juego9, juego25)
 	begin 
 		if((vc > 100 and vc <580 and hc > 385 and hc < 390 and videoON = '1' and juego9 = '1')) then  --first hz line
 			red <= "0000";
