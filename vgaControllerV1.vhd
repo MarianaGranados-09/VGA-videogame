@@ -73,22 +73,40 @@ begin
 	end process;
 	
 	--visible area is 640 - 480
-	process(hc, videoON)
+	fondo: process(hc, vc, videoON)
 	begin 
-		if((hc > 48 and hc < 800 and videoON = '1')) then
+		if((hc > 48 and hc < 465 and videoON = '1')) then
+			red <= "0000";
+			blue <= "1111";
+			green <= "0000";
+			if((vc > 100 and vc <200 and hc > 100 and videoON = '1')) then
+				red <= "1111";
+				blue <= "0000";
+				green <= "0000";
+			end if;
+		elsif((hc >=465 and hc < 800 and videoON = '1')) then
 			red <= "0000";
 			blue <= "0000";
 			green <= "1111";
-		--elsif((hc > 60 and hc < 100 and videoON = '1') then
---			green <= "1111";
---		elsif((hc > 256) and (hc < 450) and (videoON = '1')) then
---			blue <= "1111";
 		else
 			red <= "0000";
 			green <= "0000";
 			blue <= "0000";
 		end if;
 	end process;
+	
+	--segundocolor: process(hc, videoON)
+--	begin
+--		if((hc >=465 and hc < 800 and videoON = '1')) then
+--			red <= "0000";
+--			blue <= "0000";
+--			green <= "1111";
+--		else
+--			red <= "0000";
+--			green <= "0000";
+--			blue <= "0000";
+--		end if;
+--	end process;
 	
 	process(hc, vc)
 	begin 
