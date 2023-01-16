@@ -111,19 +111,19 @@ begin
 			blue <= "1111";
 			green <= "0000";
 		--5x5 game
-		elsif((vc > 100 and vc <580 and hc > 325 and hc < 330 and videoON = '1' and juego25 = '1')) then --first hz line
+		elsif((vc > 100 and vc <600 and hc > 325 and hc < 330 and videoON = '1' and juego25 = '1')) then --first hz line
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
-		elsif((vc > 100 and vc <580 and hc > 420 and hc < 425 and videoON = '1' and juego25 = '1')) then --second hz line
+		elsif((vc > 100 and vc <600 and hc > 420 and hc < 425 and videoON = '1' and juego25 = '1')) then --second hz line
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
-		elsif((vc > 100 and vc <580 and hc > 510 and hc < 515 and videoON = '1' and juego25 = '1')) then --third hz line
+		elsif((vc > 100 and vc <600 and hc > 510 and hc < 515 and videoON = '1' and juego25 = '1')) then --third hz line
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
-		elsif((vc > 100 and vc <580 and hc > 600 and hc < 605 and videoON = '1' and juego25 = '1')) then --fourth hz line
+		elsif((vc > 100 and vc <600 and hc > 600 and hc < 605 and videoON = '1' and juego25 = '1')) then --fourth hz line
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
@@ -147,15 +147,15 @@ begin
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
-		elsif((vc > 675 and vc <680 and hc > 675 and hc < 680 and videoON = '1' and juego25 = '1')) then	--margin hz bottom
+		elsif((vc > 595 and vc <600 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then	--margin hz bottom
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
-		elsif((vc > 100 and vc <580 and hc > 240 and hc < 245 and videoON = '1' and juego25 = '1')) then	--margin vt top
+		elsif((vc > 100 and vc <600 and hc > 240 and hc < 245 and videoON = '1' and juego25 = '1')) then	--margin vt top
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
-		elsif((vc > 100 and vc <580 and hc > 675 and hc < 680 and videoON = '1' and juego25 = '1')) then	--margin vt bottom
+		elsif((vc > 100 and vc <600 and hc > 675 and hc < 680 and videoON = '1' and juego25 = '1')) then	--margin vt bottom
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
