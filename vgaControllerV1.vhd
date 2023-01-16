@@ -8,6 +8,8 @@ entity vgaControllerV1 is
 	clk : in std_logic;
 	hs	: out std_logic;
 	vs  : out std_logic;
+	juego9 : in std_logic; --sw para juego con 9 espacios
+	juego25: in std_logic; --sw para juego con 25 espacios
 	red	: out std_logic_vector(3 downto 0);
 	green : out std_logic_vector(3 downto 0);
 	blue  : out std_logic_vector(3 downto 0)
@@ -73,40 +75,47 @@ begin
 	end process;
 	
 	--visible area is 640 - 480
-	fondo: process(hc, vc, videoON)
+	juego9x9: process(hc, vc, videoON, juego9, juego25)
 	begin 
-		--if((hc > 48 and hc < 465 and videoON = '1')) then
---			red <= "0000";
---			blue <= "1111";
---			green <= "0000";
-		if((vc > 200 and vc <450 and hc > 200 and hc < 400 and videoON = '1')) then
-			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-			--end if;
-		elsif((hc >=465 and hc < 800 and videoON = '1')) then
+		if((vc > 100 and vc <580 and hc > 385 and hc < 390 and videoON = '1' and juego9 = '1')) then  --first hz line
 			red <= "0000";
-			blue <= "0000";
-			green <= "1111";
+			blue <= "1111";
+			green <= "0000";
+		elsif((vc > 100 and vc <580 and hc > 530 and hc < 535 and videoON = '1' and juego9 = '1')) then --second hz line
+			red <= "0000";
+			blue <= "1111";
+			green <= "0000";
+		elsif((vc > 245 and vc <250 and hc > 240 and hc < 660 and videoON = '1' and juego9 = '1')) then	--first vt line
+			red <= "0000";
+			blue <= "1111";
+			green <= "0000";
+		elsif((vc > 420 and vc <425 and hc > 240 and hc < 660 and videoON = '1' and juego9 = '1')) then	--second vt line
+			red <= "0000";
+			blue <= "1111";
+			green <= "0000";
+		elsif((vc > 100 and vc <105 and hc > 240 and hc < 660 and videoON = '1' and juego9 = '1')) then	 --margin hz top
+			red <= "0000";
+			blue <= "1111";
+			green <= "0000";
+		elsif((vc > 580 and vc <585 and hc > 240 and hc < 660 and videoON = '1' and juego9 = '1')) then	--margin hz bottom
+			red <= "0000";
+			blue <= "1111";
+			green <= "0000";
+		elsif((vc > 100 and vc <585 and hc > 240 and hc < 245 and videoON = '1' and juego9 = '1')) then	--margin vt top
+			red <= "0000";
+			blue <= "1111";
+			green <= "0000";
+		elsif((vc > 100 and vc <585 and hc > 655 and hc < 660 and videoON = '1' and juego9 = '1')) then	--margin vt bottom
+			red <= "0000";
+			blue <= "1111";
+			green <= "0000";
+			
 		else
 			red <= "0000";
 			green <= "0000";
 			blue <= "0000";
 		end if;
 	end process;
-	
-	--segundocolor: process(hc, videoON)
---	begin
---		if((hc >=465 and hc < 800 and videoON = '1')) then
---			red <= "0000";
---			blue <= "0000";
---			green <= "1111";
---		else
---			red <= "0000";
---			green <= "0000";
---			blue <= "0000";
---		end if;
---	end process;
 	
 	process(hc, vc)
 	begin 
