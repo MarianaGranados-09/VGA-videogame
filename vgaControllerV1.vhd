@@ -75,15 +75,15 @@ begin
 	--visible area is 640 - 480
 	fondo: process(hc, vc, videoON)
 	begin 
-		if((hc > 48 and hc < 465 and videoON = '1')) then
-			red <= "0000";
-			blue <= "1111";
+		--if((hc > 48 and hc < 465 and videoON = '1')) then
+--			red <= "0000";
+--			blue <= "1111";
+--			green <= "0000";
+		if((vc > 200 and vc <450 and hc > 200 and hc < 400 and videoON = '1')) then
+			red <= "1111";
+			blue <= "0000";
 			green <= "0000";
-			if((vc > 100 and vc <200 and hc > 100 and videoON = '1')) then
-				red <= "1111";
-				blue <= "0000";
-				green <= "0000";
-			end if;
+			--end if;
 		elsif((hc >=465 and hc < 800 and videoON = '1')) then
 			red <= "0000";
 			blue <= "0000";
