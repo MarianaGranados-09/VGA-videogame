@@ -75,10 +75,9 @@ begin
 	end process;
 	
 	--visible area is 640 - 480
-		   
-	--3x3 tic tac toe game
-	juego3x3: process(hc, vc, videoON, juego9, juego25)
-	begin 
+	gameboard: process(hc, vc, videoON, juego9, juego25)
+	begin
+		--3x3 game
 		if((vc > 100 and vc <580 and hc > 385 and hc < 390 and videoON = '1' and juego9 = '1')) then  --first hz line
 			red <= "0000";
 			blue <= "1111";
@@ -111,13 +110,62 @@ begin
 			red <= "0000";
 			blue <= "1111";
 			green <= "0000";
-			
+		--5x5 game
+		elsif((vc > 100 and vc <580 and hc > 325 and hc < 330 and videoON = '1' and juego25 = '1')) then --first hz line
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 100 and vc <580 and hc > 420 and hc < 425 and videoON = '1' and juego25 = '1')) then --second hz line
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 100 and vc <580 and hc > 510 and hc < 515 and videoON = '1' and juego25 = '1')) then --third hz line
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 100 and vc <580 and hc > 600 and hc < 605 and videoON = '1' and juego25 = '1')) then --fourth hz line
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 200 and vc <205 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then --first vt line
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 295 and vc <300 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then --sec vt line
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 395 and vc <400 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then --third vt line
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 495 and vc <500 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then --fourth vt line
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 100 and vc <105 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then	 --margin hz top
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 675 and vc <680 and hc > 675 and hc < 680 and videoON = '1' and juego25 = '1')) then	--margin hz bottom
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 100 and vc <580 and hc > 240 and hc < 245 and videoON = '1' and juego25 = '1')) then	--margin vt top
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
+		elsif((vc > 100 and vc <580 and hc > 675 and hc < 680 and videoON = '1' and juego25 = '1')) then	--margin vt bottom
+			red <= "0011";
+			blue <= "0011";
+			green <= "0000";
 		else
 			red <= "0000";
 			green <= "0000";
 			blue <= "0000";
 		end if;
 	end process;
+	
 	
 	process(hc, vc)
 	begin 
