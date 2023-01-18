@@ -10,6 +10,7 @@ entity vgaControllerV1 is
 	vs  : out std_logic;
 	juego9 : in std_logic; --sw para juego con 9 espacios
 	juego25: in std_logic; --sw para juego con 25 espacios
+	--start :  in std_logic; --sw para inciar juego
 	red	: out std_logic_vector(3 downto 0);
 	green : out std_logic_vector(3 downto 0);
 	blue  : out std_logic_vector(3 downto 0)
@@ -74,11 +75,23 @@ begin
 		end if;
 	end process;
 	
+	--process(start)
+	
 	--visible area is 640 - 480
 	gameboard: process(hc, vc, videoON, juego9, juego25)
 	begin
+		--starting screen
+		if((hc > 48 and hc < 800 and vc > 43 and vc < 200 and videoON = '1' and juego25 = '0' and juego9 = '0')) then
+			red <= "0000";
+			blue <= "0000";
+			green <= "1111";
+		elsif((hc > 48 and hc < 800 and vc > 400 and vc < 800 and videoON = '1' and juego25 = '0' and juego9 = '0')) then
+			red <= "0000";
+			blue <= "0000";
+			green <= "1111";
+		
 		--3x3 game
-		if((vc > 100 and vc <580 and hc > 385 and hc < 390 and videoON = '1' and juego9 = '1')) then  --first hz line
+		elsif((vc > 100 and vc <580 and hc > 385 and hc < 390 and videoON = '1' and juego9 = '1')) then  --first hz line
 			red <= "0000";
 			blue <= "1111";
 			green <= "0000";
@@ -131,7 +144,7 @@ begin
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
-		elsif((vc > 295 and vc <300 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then --sec vt line
+		elsif((vc > 295 and vc <300 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1' )) then --sec vt line
 			red <= "0011";
 			blue <= "0011";
 			green <= "0000";
