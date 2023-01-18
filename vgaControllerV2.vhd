@@ -81,15 +81,15 @@ begin
 	gameboard: process(hc, vc, videoON, juego9, juego25, start)
 	begin
 		--starting screen
-		--if((hc > 48 and hc < 800 and vc > 43 and vc < 200 and videoON = '1' and juego25 = '0' and juego9 = '0')) then
---			red <= "0000";
---			blue <= "0000";
---			green <= "1111";
---		elsif((hc > 48 and hc < 800 and vc > 400 and vc < 800 and videoON = '1' and juego25 = '0' and juego9 = '0')) then
---			red <= "0000";
---			blue <= "0000";
---			green <= "1111";
-		if((hc > 290 and hc < 340 and vc > 110 and vc < 125 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
+		if((hc > 48 and hc < 800 and vc > 60 and vc < 100 and videoON = '1' and juego25 = '0' and juego9 = '0' and start ='1')) then
+			red <= "0100";
+			blue <= "0110";
+			green <= "0000";
+		elsif((hc > 48 and hc < 800 and vc > 210 and vc < 300 and videoon = '1' and juego25 = '0' and juego9 = '0' and start ='1')) then
+			red <= "0000";
+			blue <= "0110";
+			green <= "0100";
+		elsif((hc > 290 and hc < 340 and vc > 110 and vc < 125 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -195,6 +195,7 @@ begin
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
+			--toe finished
 		
 
 		--3x3 game
