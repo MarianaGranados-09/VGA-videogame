@@ -24,5 +24,10 @@ Making tests to output text (vgaControllerV2.vhd)
 ![fourthex](https://user-images.githubusercontent.com/89766019/213114802-e7a6c86d-b730-4d03-b8b8-68bd684f9cac.jpg)
 
 
+Finish "tic tac toe" on screen
+
+![quinex](https://user-images.githubusercontent.com/89766019/213287584-95c833bc-c43a-4b52-80e5-eea5be148172.jpg)
+
+
 
 
