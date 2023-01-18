@@ -117,6 +117,45 @@ begin
 			red <= "1111";
 			blue <= "0000";
 			green <= "0000";
+		--word tic finished
+		elsif((hc > 408 and hc < 458 and vc > 110 and vc < 125 and videoON = '1' and start = '1')) then --horiz T line 
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		elsif((hc > 426 and hc < 438 and vc > 115 and vc < 200 and videoON = '1' and start = '1')) then --vert T line
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		elsif((hc > 451 and hc < 460 and vc > 150 and vc < 200 and videoON = '1' and start = '1')) then --a
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		elsif((hc > 459 and hc < 480 and vc > 145 and vc < 151 and videoON = '1' and start = '1')) then --a
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		elsif((hc > 459 and hc < 480 and vc > 165 and vc < 175 and videoON = '1' and start = '1')) then --a
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		elsif((hc > 479 and hc < 488 and vc > 150 and vc < 200 and videoON = '1' and start = '1')) then --a
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		elsif((hc > 498 and hc < 507 and vc > 150 and vc < 200 and videoON = '1' and start = '1')) then --c
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		elsif((hc > 506 and hc < 525 and vc > 145 and vc < 151 and videoON = '1' and start = '1')) then --c
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		elsif((hc > 506 and hc < 525 and vc > 194 and vc < 200 and videoON = '1' and start = '1')) then --c
+			red <= "1111";
+			blue <= "0000";
+			green <= "0000";
+		
+		
 		
 		--3x3 game
 		elsif((vc > 100 and vc <580 and hc > 385 and hc < 390 and videoON = '1' and juego9 = '1' and juego25 = '0')) then  --first hz line
