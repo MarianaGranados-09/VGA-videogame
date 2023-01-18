@@ -19,7 +19,7 @@ Showing 5x5 game with switch juego25 (pin_c11 on fpga)
 ![thirdex](https://user-images.githubusercontent.com/89766019/212756133-63c64be4-bcc4-45d8-8e41-f65fe49e5329.jpg)
 
 
-Making tests to output text
+Making tests to output text (vgaControllerV2.vhd)
 
 ![fourthex](https://user-images.githubusercontent.com/89766019/213114802-e7a6c86d-b730-4d03-b8b8-68bd684f9cac.jpg)
 
