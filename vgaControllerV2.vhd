@@ -89,74 +89,114 @@ begin
 --			red <= "0000";
 --			blue <= "0000";
 --			green <= "1111";
-		if((hc > 290 and hc < 340 and vc > 110 and vc < 125 and videoON = '1' and start = '1')) then --horiz T line 
+		if((hc > 290 and hc < 340 and vc > 110 and vc < 125 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 308 and hc < 322 and vc > 115 and vc < 200 and videoON = '1' and start = '1')) then --vert T line
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 308 and hc < 322 and vc > 115 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --vert T line
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 340 and hc < 351 and vc > 160 and vc < 200 and videoON = '1' and start = '1')) then --vert i line 
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 340 and hc < 351 and vc > 160 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --vert i line 
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 340 and hc < 351 and vc > 140 and vc < 155 and videoON = '1' and start = '1')) then --dot for i
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 340 and hc < 351 and vc > 140 and vc < 155 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --dot for i
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 362 and hc < 373 and vc > 150 and vc < 200 and videoON = '1' and start = '1')) then --c
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 362 and hc < 373 and vc > 150 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --c
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 372 and hc < 390 and vc > 145 and vc < 151 and videoON = '1' and start = '1')) then --c
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 372 and hc < 390 and vc > 145 and vc < 151 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --c
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 372 and hc < 390 and vc > 194 and vc < 200 and videoON = '1' and start = '1')) then --c
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 372 and hc < 390 and vc > 194 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --c
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
+			blue <= "1111";
+			green <= "1111";
 		--word tic finished
-		elsif((hc > 408 and hc < 458 and vc > 110 and vc < 125 and videoON = '1' and start = '1')) then --horiz T line 
+		elsif((hc > 408 and hc < 458 and vc > 110 and vc < 125 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 426 and hc < 438 and vc > 115 and vc < 200 and videoON = '1' and start = '1')) then --vert T line
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 426 and hc < 438 and vc > 115 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --vert T line
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 451 and hc < 460 and vc > 150 and vc < 200 and videoON = '1' and start = '1')) then --a
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 451 and hc < 460 and vc > 150 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --a
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 459 and hc < 480 and vc > 145 and vc < 151 and videoON = '1' and start = '1')) then --a
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 459 and hc < 480 and vc > 145 and vc < 151 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --a
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 459 and hc < 480 and vc > 165 and vc < 175 and videoON = '1' and start = '1')) then --a
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 459 and hc < 480 and vc > 165 and vc < 175 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --a
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 479 and hc < 488 and vc > 150 and vc < 200 and videoON = '1' and start = '1')) then --a
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 479 and hc < 488 and vc > 150 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --a
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 498 and hc < 507 and vc > 150 and vc < 200 and videoON = '1' and start = '1')) then --c
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 498 and hc < 507 and vc > 150 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --c
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 506 and hc < 525 and vc > 145 and vc < 151 and videoON = '1' and start = '1')) then --c
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 506 and hc < 525 and vc > 145 and vc < 151 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --c
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((hc > 506 and hc < 525 and vc > 194 and vc < 200 and videoON = '1' and start = '1')) then --c
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 506 and hc < 525 and vc > 194 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --c
 			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
+			blue <= "1111";
+			green <= "1111"; 
+		--tac word finished
+		elsif((hc > 542 and hc < 595 and vc > 110 and vc < 125 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 563 and hc < 575 and vc > 115 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --vert T line
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 585 and hc < 591 and vc > 150 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --o
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 590 and hc < 612 and vc > 145 and vc < 151 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --o
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 590 and hc < 612 and vc > 194 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --o
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 611 and hc < 617 and vc > 150 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --o
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 625 and hc < 631 and vc > 145 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --e
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 630 and hc < 648 and vc > 145 and vc < 151 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --e
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 630 and hc < 648 and vc > 165 and vc < 172 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --e
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		elsif((hc > 630 and hc < 648 and vc > 194 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --e
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
 		
-		
-		
+
 		--3x3 game
 		elsif((vc > 100 and vc <580 and hc > 385 and hc < 390 and videoON = '1' and juego9 = '1' and juego25 = '0')) then  --first hz line
 			red <= "0000";
