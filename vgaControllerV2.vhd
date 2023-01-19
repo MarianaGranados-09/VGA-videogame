@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 use IEEE.STD_LOGIC_ARITH.all; 
 
-entity vgaControllerV1 is
+entity VGAController is
 	port( 
 	clk : in std_logic;
 	hs	: out std_logic;
@@ -15,9 +15,9 @@ entity vgaControllerV1 is
 	green : out std_logic_vector(3 downto 0);
 	blue  : out std_logic_vector(3 downto 0)
 	);
-end vgaControllerV1;
+end VGAController;
 
-architecture Behavioral of vgaControllerV1 is
+architecture Behavioral of VGAController is
 
 constant hpixels : integer := 800; 
 constant vlines : integer := 630; 
@@ -81,22 +81,54 @@ begin
 	gameboard: process(hc, vc, videoON, juego9, juego25, start)
 	begin
 		--starting screen
-		if((hc > 48 and hc < 800 and vc > 60 and vc < 100 and videoON = '1' and juego25 = '0' and juego9 = '0' and start ='1')) then
-			red <= "0100";
-			blue <= "0110";
+		if((hc > 290 and hc < 648 and vc > 80 and vc < 100 and videoON = '1' and juego25 = '0' and juego9 = '0' and start ='1')) then -- Edge
+			red <= "1100";		-- Pink.
+			blue <= "1110";
 			green <= "0000";
-		elsif((hc > 48 and hc < 800 and vc > 210 and vc < 300 and videoon = '1' and juego25 = '0' and juego9 = '0' and start ='1')) then
-			red <= "0000";
-			blue <= "0110";
-			green <= "0100";
+		elsif((hc > 290 and hc < 648 and vc > 210 and vc < 230 and videoon = '1' and juego25 = '0' and juego9 = '0' and start ='1')) then -- Edge
+			red <= "1100"; 		-- Yellow.
+			blue <= "0000";
+			green <= "1100"; 
+		-- Edges finished 
+		elsif((((hc >= 240 and hc <= 246) and (vc >= 110 and vc <= 120)) or
+			(((hc >= 222 and hc <= 228) or  (hc >= 240 and hc <= 246) 	or  (hc >= 258 and hc <= 264)) and (vc >= 120 and vc <= 130)) or
+			(((hc >= 228 and hc <= 234) or  (hc >= 252 and hc <= 258)) 	and (vc >= 130 and vc <= 140)) or 
+			 ((hc >= 222 and hc <= 264) and (vc >= 140 and vc < 150)) 	or
+			(((hc > 216  and hc < 228) 	or  (hc > 234  and hc < 252) 	or  (hc > 258 and hc < 270))   and (vc >= 150 and vc <= 160)) or
+			 ((hc >= 222 and hc <= 264) and (vc > 160  and vc <= 170)) 	or
+			(((hc >= 234 and hc < 240)  or  (hc > 246  and hc <= 252)) 	and (vc >= 170 and vc <= 180)) or
+			(((hc >= 222 and hc <= 234) or  (hc >= 240 and hc <= 246) 	or  (hc >= 252 and hc <= 264)) and (vc >= 180 and vc <= 190)) or
+			(((hc >= 228 and hc <= 234) or  (hc >= 252 and hc <= 258)) 	and (vc >= 190 and vc <= 200)) or
+			 ((hc >= 240 and hc <= 246) and (vc >= 200 and vc <= 210)))
+			and videoON = '1' and juego25 = '0' and juego9 = '0' and start ='1') then
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+			
+		-- Mouse finished
+		elsif((((hc >= 704 and hc <= 710) and (vc >= 110 and vc <= 120)) or
+			(((hc >= 686 and hc <= 692) or  (hc >= 704 and hc <= 710) 	or  (hc >= 722 and hc <= 728))  and (vc >= 120 and vc < 130))  	or
+			(((hc >= 692 and hc < 704) 	or  (hc > 710  and hc <= 722)) 	and (vc >= 130 and vc <= 140))  or 
+			(((hc > 674  and hc < 680)	or  (hc > 686  and hc < 728) 	or  (hc > 734  and hc < 740))   and (vc > 140  and vc < 150)) 	or
+			(((hc > 674  and hc < 692)	or  (hc > 698  and hc < 716) 	or  (hc > 722  and hc < 740))   and (vc >= 150 and vc <= 160))  or
+			 ((hc >= 686 and hc <= 728) and (vc > 160  and vc < 170)) 	or
+			(((hc > 680  and hc < 686) 	or  (hc >= 692 and hc < 698)	or	(hc >= 704 and hc < 710) 	or	(hc >= 716 and hc < 722)	or	(hc > 728 and hc < 734))	and (vc >= 170 and vc <= 180)) or
+			(((hc > 680  and hc < 686) 	or  (hc > 728  and hc < 734))  	and (vc > 180  and vc < 190))   or
+			(((hc >= 686 and hc <= 692) or  (hc >= 722 and hc <= 728)) 	and (vc >= 190 and vc < 200)))
+			and videoON = '1' and juego25 = '0' and juego9 = '0' and start ='1') then
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+		-- Cat finished
+			
 		elsif((hc > 290 and hc < 340 and vc > 110 and vc < 125 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
-			red <= "1111";
-			blue <= "1111";
-			green <= "1111";
+			red <= "1000";		-- Purple.
+			blue <= "1110";
+			green <= "0000";
 		elsif((hc > 308 and hc < 322 and vc > 115 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --vert T line
-			red <= "1111";
-			blue <= "1111";
-			green <= "1111";
+			red <= "1000";		-- Purple.
+			blue <= "1110";
+			green <= "0000";
 		elsif((hc > 340 and hc < 351 and vc > 160 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --vert i line 
 			red <= "1111";
 			blue <= "1111";
@@ -119,13 +151,13 @@ begin
 			green <= "1111";
 		--word tic finished
 		elsif((hc > 408 and hc < 458 and vc > 110 and vc < 125 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
-			red <= "1111";
-			blue <= "1111";
-			green <= "1111";
+			red <= "0000";  -- Green
+			blue <= "1000";	
+			green <= "1100";
 		elsif((hc > 426 and hc < 438 and vc > 115 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --vert T line
-			red <= "1111";
-			blue <= "1111";
-			green <= "1111";
+			red <= "0000";  -- Green
+			blue <= "1000";
+			green <= "1100";
 		elsif((hc > 451 and hc < 460 and vc > 150 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --a
 			red <= "1111";
 			blue <= "1111";
@@ -156,13 +188,13 @@ begin
 			green <= "1111"; 
 		--tac word finished
 		elsif((hc > 542 and hc < 595 and vc > 110 and vc < 125 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
-			red <= "1111";
-			blue <= "1111";
-			green <= "1111";
+			red <= "1110"; 		-- Orange
+			blue <= "0100";
+			green <= "1010";
 		elsif((hc > 563 and hc < 575 and vc > 115 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --vert T line
-			red <= "1111";
-			blue <= "1111";
-			green <= "1111";
+			red <= "1110"; 		-- Orange
+			blue <= "0100";
+			green <= "1010";
 		elsif((hc > 585 and hc < 591 and vc > 150 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --o
 			red <= "1111";
 			blue <= "1111";
@@ -297,5 +329,3 @@ begin
 		end if;
 	end process;
 end Behavioral;
-														
-
