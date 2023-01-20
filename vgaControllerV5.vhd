@@ -96,10 +96,7 @@ begin
 			vs <= '0';
 		end if;
 	end process;
-	
-	--process(start)
-	
-	--visible area is 640 - 480
+
 	gameboard: process(hc, vc, videoON, xplus11, xplus12, xplus21, xplus22, yplus11, yplus12, yplus21, yplus22)
 	begin
 		if((vc > yplus11 + yplus21) and (vc < yplus12 + yplus22) and (hc > xplus11 + xplus21) and (hc < xplus12 + xplus22) and videoON = '1') then
@@ -114,10 +111,10 @@ begin
 		end if;
 	end process; 
 	
-	animacionHZ : process(swRight, count1R, xplus11, xplus12, xplus21, xplus22, btnMove)
+	animacionHZ : process(swRight, xplus11, xplus12, xplus21, xplus22, btnMove)
 	begin
 		if(swRight = '1') then 
-			if(xplus21 < 351 and xplus22 < 401 and count1R(0) = '1') then
+			if(xplus21 < 251 and xplus22 < 301) then
 				if(btnMove'EVENT and btnMove = '0') then
 					xplus21 <= xplus21 + 100;
 					xplus22 <= xplus22 + 100;
@@ -137,10 +134,10 @@ begin
 		end if;
 	end process;
 	
-	animacionVT : process(swDown, count1R, yplus11, yplus12, yplus21, yplus22, btnMove)
+	animacionVT : process(swDown, yplus11, yplus12, yplus21, yplus22, btnMove)
 	begin
 		if(swDown = '1') then 
-			if(yplus21 < 351 and yplus22 < 401 and count1R(0) = '1') then
+			if(yplus21 < 251 and yplus22 < 301) then
 				if(btnMove'EVENT and btnMove = '0') then
 					yplus21 <= yplus21 + 100;
 					yplus22 <= yplus22 + 100;
