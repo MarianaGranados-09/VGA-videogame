@@ -33,8 +33,14 @@ constant hfp : integer := 784; --hfront porch
 constant vbp : integer := 33; --vback porch
 constant vfp : integer := 784; --vfront porch
 
-signal xplus1 : integer := 250;
-signal xplus2 : integer := 300;
+signal xplus11 : integer := 250;
+signal xplus12 : integer := 300;
+
+signal xplus21 : integer := 0;
+signal xplus22 : integer := 0;
+
+signal xplus31 : integer := 0;
+signal xplus32 : integer := 0;
 
 
 signal count1R : std_logic_vector(2 downto 0) := (others => '0');
@@ -90,17 +96,10 @@ begin
 	--process(start)
 	
 	--visible area is 640 - 480
-	gameboard: process(hc, vc, videoON, xplus1, xplus2, count1R)
+	gameboard: process(hc, vc, videoON, xplus11, xplus12, xplus21, xplus22, xplus31, xplus32)
 	begin
-		if((vc > 200 and vc < 300 and hc > 250 and hc < 300 and videoON = '1' and count1R(0) = '1' and count1R(1) <= '0' and count1R(2) <= '0')) then --pos 1x1
-			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((vc > 200 and vc < 300 and hc > 350 and hc < 400 and videoON = '1' and count1R(0) = '0' and count1R(1) <= '1' and count1R(2) <= '0')) then --pos 1x2
-			red <= "1111";
-			blue <= "0000";
-			green <= "0000";
-		elsif((vc > 200 and vc < 300 and hc > 450 and hc < 500 and videoON = '1' and count1R(0) = '0' and count1R(1) <= '0' and count1R(2) <= '1')) then --pos 1x3
+		if(vc > 200 and vc < 300 and (hc > xplus11 + xplus21) and (hc < xplus12 + xplus22) and videoON = '1') then
+			count1R(0) <= '1';
 			red <= "1111";
 			blue <= "0000";
 			green <= "0000";
@@ -111,20 +110,24 @@ begin
 		end if;
 	end process; 
 	
-	animacion : process(swRight, swUp, swDown, swLeft, count1R, btnMove, hc)
+	animacion : process(swRight, swUp, swDown, swLeft, count1R, xplus21, xplus22, btnMove)
 	begin
-		if(swUp = '0' and swRight = '1' and swDown = '0' and swLeft = '0' and btnMove = '0' and hc > 350 and hc < 400) then --pos 1x2
-			count1R(1) <= '1';
-			count1R(0) <= '0';
-			count1R(2) <= '0';
-		elsif(swUp = '0' and swRight = '1' and swDown = '0' and swLeft = '0' and btnMove = '0' and hc > 450 and hc < 500) then --pos 1x3
-			count1R(2) <= '1';
-			count1R(0) <= '0'; 
-			count1R(1) <= '0';
-		else
-			count1R(0) <= '1';
-			count1R(1) <= '0';
-			count1R(2) <= '0';
+		if(swRight = '1') then --pos 1x2
+			if(xplus21 < 351 and xplus22 < 401 and count1R(0) = '1') then
+				if(btnMove'EVENT and btnMove = '0') then
+					xplus21 <= xplus21 + 100;
+					xplus22 <= xplus22 + 100;
+				else 
+					xplus21 <= xplus21;
+					xplus22 <= xplus22;
+				end if;
+			else 
+				xplus21 <= xplus21;
+				xplus22 <= xplus22;
+			end if;
+		else 
+				xplus21 <= xplus21;
+				xplus22 <= xplus22;
 		end if;
 	end process;
 									 
