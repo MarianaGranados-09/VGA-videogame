@@ -16,7 +16,8 @@ entity vgaControllerV1 is
 	swDown : in std_logic; --sw to choose down 
 	swLeft : in std_logic; --sw to choose left
 	swRight : in std_logic; --sw to choose right
-	btnMove : in std_logic;	--sw to move
+	btnMove : in std_logic;	--sw to move 
+	btnRestart : in std_logic; --sw to restart position 
 	red	: out std_logic_vector(3 downto 0);
 	green : out std_logic_vector(3 downto 0);
 	blue  : out std_logic_vector(3 downto 0)
@@ -39,8 +40,11 @@ signal xplus12 : integer := 300;
 signal xplus21 : integer := 0;
 signal xplus22 : integer := 0;
 
-signal xplus31 : integer := 0;
-signal xplus32 : integer := 0;
+signal yplus11 : integer := 100;
+signal yplus12 : integer := 150;
+
+signal yplus21 : integer := 0;
+signal yplus22 : integer := 0;
 
 
 signal count1R : std_logic_vector(2 downto 0) := (others => '0');
@@ -96,9 +100,9 @@ begin
 	--process(start)
 	
 	--visible area is 640 - 480
-	gameboard: process(hc, vc, videoON, xplus11, xplus12, xplus21, xplus22, xplus31, xplus32)
+	gameboard: process(hc, vc, videoON, xplus11, xplus12, xplus21, xplus22, yplus11, yplus12, yplus21, yplus22)
 	begin
-		if(vc > 200 and vc < 300 and (hc > xplus11 + xplus21) and (hc < xplus12 + xplus22) and videoON = '1') then
+		if((vc > yplus11 + yplus21) and (vc < yplus12 + yplus22) and (hc > xplus11 + xplus21) and (hc < xplus12 + xplus22) and videoON = '1') then
 			count1R(0) <= '1';
 			red <= "1111";
 			blue <= "0000";
@@ -110,9 +114,9 @@ begin
 		end if;
 	end process; 
 	
-	animacion : process(swRight, swUp, swDown, swLeft, count1R, xplus21, xplus22, btnMove)
+	animacionHZ : process(swRight, count1R, xplus11, xplus12, xplus21, xplus22, btnMove)
 	begin
-		if(swRight = '1') then --pos 1x2
+		if(swRight = '1') then 
 			if(xplus21 < 351 and xplus22 < 401 and count1R(0) = '1') then
 				if(btnMove'EVENT and btnMove = '0') then
 					xplus21 <= xplus21 + 100;
@@ -121,15 +125,40 @@ begin
 					xplus21 <= xplus21;
 					xplus22 <= xplus22;
 				end if;
-			else 
-				xplus21 <= xplus21;
-				xplus22 <= xplus22;
+			elsif(btnRestart'EVENT and btnRestart = '0') then
+					xplus11	<= 250;
+					xplus12 <= 300;
+					xplus21 <= 0;
+					xplus22 <= 0;
+			else
+				xplus21 <= 0;
+				xplus22 <= 0;
 			end if;
-		else 
-				xplus21 <= xplus21;
-				xplus22 <= xplus22;
 		end if;
 	end process;
+	
+	animacionVT : process(swDown, count1R, yplus11, yplus12, yplus21, yplus22, btnMove)
+	begin
+		if(swDown = '1') then 
+			if(yplus21 < 351 and yplus22 < 401 and count1R(0) = '1') then
+				if(btnMove'EVENT and btnMove = '0') then
+					yplus21 <= yplus21 + 100;
+					yplus22 <= yplus22 + 100;
+				else 
+					yplus21 <= yplus21;
+					yplus22 <= yplus22;
+				end if;
+			elsif(btnRestart'EVENT and btnRestart = '0') then
+					yplus11	<= 200;
+					yplus12 <= 250;
+					yplus21 <= 0;
+					yplus22 <= 0;
+			else
+				yplus21 <= 0;
+				yplus22 <= 0;
+			end if;
+		end if;
+	end process; 
 									 
 	process(hc, vc)
 	begin 
