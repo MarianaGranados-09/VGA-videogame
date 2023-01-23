@@ -48,7 +48,7 @@ signal YRise : integer := 0;
 signal SpaceX : integer := 0;
 signal SpaceY : integer := 0;
 
-signal Player1 : integer := 0;
+signal Player1 : std_logic := '1';
 										  
 signal hc, vc : std_logic_vector(9 downto 0); --contador vertical y horizontal
 signal clk25 : std_logic; --divisor de reloj para 25M
@@ -414,10 +414,8 @@ begin
 			SpaceX <= SpaceX;
 		end if;
 		
-		if(btnSelect = '0' and btnSelect'EVENT)then
-			Player1 <= 1;
-		else
-			Player1 <= Player1;
+		if(btnSelect = '0')then
+			Player1 <= not Player1;
 		end if;
 	end process;
 	
@@ -459,14 +457,16 @@ begin
 		end if;
 	end process;
 	
-	OuputTestPlayer: process(Player1)
+	OuputTestPlayer: process(Player1, juego9, start)
 	begin
-		if(Player1 = 0) then
+		if(Player1 = '1' and juego9 = '1' and start = '0') then
 			TURN <= "11111001"; --player 1
 			--11111001
-		else
+		elsif(Player1 = '0' and juego9 = '1' and start = '0')then
 			TURN <= "10100100"; --player 2	
 			--10100100
+		else
+			TURN <= "11111111";
 		end if;
 	end process;	
 	
