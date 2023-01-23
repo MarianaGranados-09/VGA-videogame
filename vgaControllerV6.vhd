@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 use IEEE.STD_LOGIC_ARITH.all; 
 
-entity VGAController is
+entity VGAControllerV1 is
 	port( 
 	clk : in std_logic;
 	hs	: out std_logic;
@@ -11,18 +11,21 @@ entity VGAController is
 	juego9 : in std_logic; --sw to start game with 9 spaces
 	juego25: in std_logic; --sw to start game with 25 spaces
 	start :  in std_logic; --sw to start game (start screen loading)
-	--switches for directio
+	--switches for direction
 	swDown : in std_logic; --sw to choose down 
 	swRight : in std_logic; --sw to choose right
-	btnMove : in std_logic;	--sw to move 
+	btnMove : in std_logic;	--btn to move 
+	btnSelect: in std_logic; --btn to Select space
+	LEDS : out std_logic_vector(3 downto 0);
+	TURN : out std_logic_vector(7 downto 0); --displays which player is playing
 	-- RGB to VGA
 	red	: out std_logic_vector(3 downto 0);
 	green : out std_logic_vector(3 downto 0);
 	blue  : out std_logic_vector(3 downto 0)
 	);
-end VGAController;
+end VGAControllerV1;
 
-architecture Behavioral of VGAController is
+architecture Behavioral of VGAControllerV1 is
 
 constant hpixels : integer := 800; 
 constant vlines : integer := 630; 
@@ -42,7 +45,10 @@ signal Y2_Origin : integer := 200;
 signal XRise : integer := 0;
 signal YRise : integer := 0;
 
-signal count1R : std_logic_vector(2 downto 0) := (others => '0');
+signal SpaceX : integer := 0;
+signal SpaceY : integer := 0;
+
+signal Player1 : integer := 0;
 										  
 signal hc, vc : std_logic_vector(9 downto 0); --contador vertical y horizontal
 signal clk25 : std_logic; --divisor de reloj para 25M
@@ -235,23 +241,6 @@ begin
 			blue <= "1111";
 			green <= "0000";
 		
-		-- Mouse movement animation 3x3	
---		elsif ((((hc >= 30 + X1_Origin + XRise and hc <= 36 + X1_Origin + XRise) and (vc >= 10 + Y1_Origin + YRise	and vc <= 20 + Y1_Origin + YRise))	or
---			(((hc >= 12 + X1_Origin + XRise and hc <= 18 + X1_Origin + XRise) or  (hc >= 30	+ X1_Origin + XRise	and hc <= 36 + X1_Origin + XRise)	or  (hc >= 48 + X1_Origin + XRise and hc <= 54 + X1_Origin + XRise))	and (vc >= 20 + Y1_Origin + YRise and vc <= 30 + Y1_Origin + YRise)) or
---			(((hc >= 18 + X1_Origin + XRise and hc <= 24 + X1_Origin + XRise) or  (hc >= 42 + X1_Origin + XRise	and hc <= 48 + X1_Origin + XRise)) and	(vc >= 30 + Y1_Origin + YRise and vc <= 40 + Y1_Origin + YRise))	or 
---			 ((hc >= 12 + X1_Origin + XRise and hc <= 54 + X1_Origin + XRise) and (vc >= 40 + Y1_Origin + YRise	and vc <  50 + Y1_Origin + YRise))	or
---			(((hc >  6	+ X1_Origin + XRise and hc <  18 + X1_Origin + XRise) or  (hc > 24  + X1_Origin + XRise	and hc <  42 + X1_Origin + XRise) 	or  (hc >  48 + X1_Origin + XRise and hc <  60 + X1_Origin + XRise))	and (vc >= 50 + Y1_Origin + YRise and vc <= 60 + Y1_Origin + YRise)) or
---			 ((hc >= 12 + X1_Origin + XRise and hc <= 54 + X1_Origin + XRise) and (vc > 60  + Y1_Origin + YRise	and vc <= 70 + Y1_Origin + YRise))	or
---			(((hc >= 24 + X1_Origin + XRise and hc <  30 + X1_Origin + XRise) or  (hc > 36  + X1_Origin + XRise	and hc <= 42 + X1_Origin + XRise)) and	(vc >= 70 + Y1_Origin + YRise and vc <= 80 + Y1_Origin + YRise))	or
---			(((hc >= 12 + X1_Origin + XRise and hc <= 24 + X1_Origin + XRise) or  (hc >= 30 + X1_Origin + XRise	and hc <= 36 + X1_Origin + XRise) 	or  (hc >= 42 + X1_Origin + XRise and hc <= 54 + X1_Origin + XRise))	and (vc >= 80 + Y1_Origin + YRise and vc <= 90 + Y1_Origin + YRise)) or
---			(((hc >= 18 + X1_Origin + XRise and hc <= 24 + X1_Origin + XRise) or  (hc >= 42 + X1_Origin + XRise	and hc <= 48 + X1_Origin + XRise)) and	(vc >= 90 + Y1_Origin + YRise and vc <= 100 + Y1_Origin + YRise))	or
---			 ((hc >= 30 + X1_Origin + XRise and hc <= 36 + X1_Origin + XRise) and (vc >= 100 + Y1_Origin + YRise and vc <= 110 + Y1_Origin + YRise)))
---			and videoON = '1' and juego25 = '0' and juego9 = '1') then
---			count1R(0) <= '1';
---			red <= "1111";
---			blue <= "1111";
---			green <= "1111"; 
-		
 		-- Mouse movement animation 3x3		
 		elsif((((hc >= 33 + X1_Origin + XRise and hc <= 39 + X1_Origin + XRise) and (vc >= 10 + Y1_Origin + YRise and vc <= 20 + Y1_Origin + YRise)) or
 			(((hc >= 15 + X1_Origin + XRise and hc <= 21 + X1_Origin + XRise) or  (hc >= 33 + X1_Origin + XRise and hc <= 39 + X1_Origin + XRise) 	or  (hc >= 51 + X1_Origin + XRise and hc <= 57 + X1_Origin + XRise)) and (vc >= 20 + Y1_Origin + YRise and vc < 30 + Y1_Origin + YRise))  	or
@@ -371,59 +360,10 @@ begin
 			green <= "1111";
 		elsif((hc > 630 and hc < 648 and vc > 194 and vc < 200 and videoON = '1' and start = '1' and juego25 = '0' and juego9 = '0')) then --e
 			red <= "1111";
-			blue <= "1111";
+			blue <= "1111";	
 			green <= "1111";
 			--toe finished
 		
-		--5x5 game
-		elsif((vc > 100 and vc <600 and hc > 325 and hc < 330 and videoON = '1' and juego25 = '1')) then --first hz line
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 100 and vc <600 and hc > 420 and hc < 425 and videoON = '1' and juego25 = '1')) then --second hz line
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 100 and vc <600 and hc > 510 and hc < 515 and videoON = '1' and juego25 = '1')) then --third hz line
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 100 and vc <600 and hc > 600 and hc < 605 and videoON = '1' and juego25 = '1')) then --fourth hz line
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 200 and vc <205 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then --first vt line
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 295 and vc <300 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1' )) then --sec vt line
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 395 and vc <400 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then --third vt line
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 495 and vc <500 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then --fourth vt line
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 100 and vc <105 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then	 --margin hz top
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 595 and vc <600 and hc > 240 and hc < 680 and videoON = '1' and juego25 = '1')) then	--margin hz bottom
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 100 and vc <600 and hc > 240 and hc < 245 and videoON = '1' and juego25 = '1')) then	--margin vt top
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
-		elsif((vc > 100 and vc <600 and hc > 675 and hc < 680 and videoON = '1' and juego25 = '1')) then	--margin vt bottom
-			red <= "0011";
-			blue <= "0011";
-			green <= "0000";
 		else
 			red <= "0000";
 			green <= "0000";
@@ -431,7 +371,7 @@ begin
 		end if;
 	end process;
 		
-	AnimationHZ3x3: process(swRight, XRise, YRise, btnMove)
+	AnimationHZ3x3: process(swRight, XRise, btnMove, btnSelect)
 	begin
 		if(swRight = '1') then 
 			if(XRise < 225) then
@@ -446,7 +386,7 @@ begin
 		end if;
 	end process;
 	
-	AnimationVT3x3: process(swDown, YRise, btnMove)
+	AnimationVT3x3: process(swDown, YRise, btnMove, btnSelect)
 	begin
 		if(swDown = '1') then 
 			if(YRise < 360) then
@@ -457,10 +397,78 @@ begin
 				end if;
 			else
 				YRise <= 0;
-			end if;
+			end if;		
+		end if;
+	end process;
+	
+	SelectP1X : process(btnSelect, XRise, SpaceX)
+	begin
+		--selecting process based off XRise position
+		if(btnSelect'EVENT and btnSelect = '0' and XRise = 0)then --1xn
+			SpaceX <= 1;
+		elsif(btnSelect'EVENT and btnSelect = '0' and XRise = 75) then --2xn
+			SpaceX <= 2;
+		elsif(btnSelect'EVENT and btnSelect = '0' and XRise = 150)then --3xn
+			SpaceX <= 3;
+		else
+			SpaceX <= SpaceX;
+		end if;
+		
+		if(btnSelect = '0' and btnSelect'EVENT)then
+			Player1 <= 1;
+		else
+			Player1 <= Player1;
+		end if;
+	end process;
+	
+	SelectP1Y: process(btnSelect, YRise, SpaceY)
+	begin
+		if(btnSelect'EVENT and btnSelect = '0' and YRise = 0)then --mx1
+			SpaceY <= 1;
+		elsif(btnSelect'EVENT and btnSelect = '0' and YRise = 120) then --mx2
+			SpaceY <= 2;
+		elsif(btnSelect'EVENT and btnSelect = '0' and YRise = 240)then --mx3
+			SpaceY <= 3;
+		else
+			SpaceY <= SpaceY;
 		end if;
 	end process; 
 	
+	OutputTest: process(SpaceX, SpaceY)
+	begin
+		if(SpaceX = 1 and SpaceY = 1)then --1x1
+			LEDS <= "0001";
+		elsif(SpaceX = 2 and SpaceY = 1) then  --1x2
+			LEDS <= "0010";
+		elsif(SpaceX = 3 and SpaceY = 1) then  --1x3
+			LEDS <= "0011";
+		elsif(SpaceX = 1 and SpaceY = 2) then  --2x1
+			LEDS <= "0100";
+		elsif(SpaceX = 2 and SpaceY = 2) then  --2x2
+			LEDS <= "0101";
+		elsif(SpaceX = 3 and SpaceY = 2) then --2x3
+			LEDS <= "0110";
+		elsif(SpaceX = 1 and SpaceY = 3) then --3x1
+			LEDS <= "0111";
+		elsif(SpaceX = 2 and SpaceY = 3) then --3x2
+			LEDS <= "1000";
+		elsif(SpaceX = 3 and SpaceY = 3) then --3x3
+			LEDS <= "1001";
+		else
+			LEDS <= "0000";
+		end if;
+	end process;
+	
+	OuputTestPlayer: process(Player1)
+	begin
+		if(Player1 = 0) then
+			TURN <= "11111001"; --player 1
+			--11111001
+		else
+			TURN <= "10100100"; --player 2	
+			--10100100
+		end if;
+	end process;	
 	
 	
 	process(hc, vc)
