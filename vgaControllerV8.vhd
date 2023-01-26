@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 use IEEE.STD_LOGIC_ARITH.all; 
 
-entity VGAController is
+entity VGAControllerV1 is
 	port( 
 	clk : in std_logic;
 	hs	: out std_logic;
@@ -20,9 +20,9 @@ entity VGAController is
 	green : out std_logic_vector(3 downto 0);
 	blue  : out std_logic_vector(3 downto 0)
 	);
-end VGAController;
+end VGAControllerV1;
 
-architecture Behavioral of VGAController is
+architecture Behavioral of VGAControllerV1 is
 
 constant hpixels : integer := 800; 
 constant vlines : integer := 630; 
@@ -1684,7 +1684,7 @@ begin
 			(((hc >= X_Winner and hc <= 10 +  X_Winner) or  (hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)	or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 190 +  X_Winner and hc <= 220 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 140 + Y_Winner and vc <= 160 + Y_Winner)))	
 			and videoON = '1' and Winner > 0 and Winner <= 1 and juego9 = '0' and juego25 = '1') then
 			red <= "1111";
-			blue <= "1111";
+			blue <= "0000";
 			green <= "1111";
 		-- Winner Player 2 5x5		
 		elsif(((((hc >= X_Winner and hc <= 10 +  X_Winner) or (hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)) and (vc >= Y_Winner and vc <= 20 + Y_Winner)) or
@@ -1696,9 +1696,9 @@ begin
 			(((hc >= X_Winner and hc <= 20 +  X_Winner) or  (hc >= 30 +  X_Winner and hc <= 50 +  X_Winner)	or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 180 +  X_Winner and hc <= 190 +  X_Winner)	or	(hc >= 210 +  X_Winner and hc <= 220 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 120 + Y_Winner and vc <= 140 + Y_Winner))  or 
 			(((hc >= X_Winner and hc <= 10 +  X_Winner) or  (hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)	or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 190 +  X_Winner and hc <= 220 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 140 + Y_Winner and vc <= 160 + Y_Winner)))	
 			and videoON = '1' and Winner > 1 and Winner <= 2 and juego9 = '0' and juego25 = '1') then
-			red <= "1111";
-			blue <= "1111";
-			green <= "1111";
+			red <= "0000";
+			blue <= "0100";
+			green <= "1110";
 		
 		-- Winner Player 1 3x3		
 		elsif(((((hc >= X_Winner and hc <= 10 +  X_Winner) or (hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)) and (vc >= Y_Winner and vc <= 20 + Y_Winner)) or
@@ -1709,9 +1709,9 @@ begin
 			(((hc >= X_Winner and hc <= 10 +  X_Winner) or  (hc >= 20 +  X_Winner and hc <= 30 +  X_Winner)	or	(hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)		or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 180 +  X_Winner and hc <= 190 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 100 + Y_Winner and vc <= 120 + Y_Winner))  or 
 			(((hc >= X_Winner and hc <= 20 +  X_Winner) or  (hc >= 30 +  X_Winner and hc <= 50 +  X_Winner)	or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 180 +  X_Winner and hc <= 190 +  X_Winner)	or	(hc >= 210 +  X_Winner and hc <= 220 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 120 + Y_Winner and vc <= 140 + Y_Winner))  or 
 			(((hc >= X_Winner and hc <= 10 +  X_Winner) or  (hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)	or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 190 +  X_Winner and hc <= 220 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 140 + Y_Winner and vc <= 160 + Y_Winner)))	
-			and videoON = '1' and Winner > 0 and Winner <= 1 and juego9 = '1' and juego25 = '0') then
+			and videoON = '1' and Winner3 > 0 and Winner3 <= 1 and juego9 = '1' and juego25 = '0') then
 			red <= "1111";
-			blue <= "1111";
+			blue <= "0000";
 			green <= "1111"; 
 			
 		-- Winner Player 2 3x3		
@@ -1723,10 +1723,10 @@ begin
 			(((hc >= X_Winner and hc <= 10 +  X_Winner) or  (hc >= 20 +  X_Winner and hc <= 30 +  X_Winner)	or	(hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)		or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 180 +  X_Winner and hc <= 190 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 100 + Y_Winner and vc <= 120 + Y_Winner))  or 
 			(((hc >= X_Winner and hc <= 20 +  X_Winner) or  (hc >= 30 +  X_Winner and hc <= 50 +  X_Winner)	or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 180 +  X_Winner and hc <= 190 +  X_Winner)	or	(hc >= 210 +  X_Winner and hc <= 220 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 120 + Y_Winner and vc <= 140 + Y_Winner))  or 
 			(((hc >= X_Winner and hc <= 10 +  X_Winner) or  (hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)	or	(hc >= 60 +  X_Winner and hc <= 70 +  X_Winner)		or	(hc >= 80 +  X_Winner and hc <= 90 +  X_Winner)		or	(hc >= 110 +  X_Winner and hc <= 120 +  X_Winner)	or	(hc >= 130 +  X_Winner and hc <= 140 +  X_Winner)	or	(hc >= 160 +  X_Winner and hc <= 170 +  X_Winner)	or	(hc >= 190 +  X_Winner and hc <= 220 +  X_Winner)	or	(hc >= 230 +  X_Winner and hc <= 240 +  X_Winner)) 	and (vc >= 140 + Y_Winner and vc <= 160 + Y_Winner)))	
-			and videoON = '1' and Winner > 1 and Winner <= 2 and juego9 = '1' and juego25 = '0') then
-			red <= "1111";
-			blue <= "1111";
-			green <= "1111";
+			and videoON = '1' and Winner3 > 1 and Winner3 <= 2 and juego9 = '1' and juego25 = '0') then
+			red <= "0000";
+			blue <= "0100";
+			green <= "1110";
 		
 		elsif((hc > 290 and hc < 340 and vc > 110 and vc < 125 and videoON = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
 			red <= "1000";		-- Purple.
@@ -2421,3 +2421,4 @@ begin
 	
 	
 end Behavioral;
+
