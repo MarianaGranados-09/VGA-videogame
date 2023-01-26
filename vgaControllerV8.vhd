@@ -10,7 +10,7 @@ entity VGAControllerV1 is
 	vs  : out std_logic;
 	juego9 : in std_logic; --sw to start game with 9 spaces
 	juego25: in std_logic; --sw to start game with 25 spaces
-	--switches for direction
+	--switches for directio
 	swDown : in std_logic; --sw to choose down 
 	swRight : in std_logic; --sw to choose right
 	btnMove : in std_logic;	--sw to move 
@@ -58,8 +58,8 @@ signal Draw3 : integer := 0;
 
 signal X_Winner : integer := 300;
 signal Y_Winner : integer := 200;
-signal X_Draw : integer := 0;
-signal Y_Draw : integer := 0;
+signal X_Draw : integer := 300;
+signal Y_Draw : integer := 200;
 
 -- Space Player 1 3x3
 signal P1_11 : integer := 0;
@@ -252,6 +252,7 @@ begin
 	
 	--process(start)
 	
+	--visible area is 640 - 480
 	Starting_screen: process(hc, vc, videoON, juego9, juego25, X1_Origin, Y1_Origin, X2_Origin, Y2_Origin, X1_Rise, X2_Rise, Y1_Rise, Y2_Rise, Turn, Winner, X_Winner, Y_Winner,
 	P1_11, P1_12, P1_13, P1_21, P1_22, P1_23, P1_31, P1_32, P1_33, X1_Mouse1, X1_Mouse2, X1_Mouse3, Y1_Mouse1, Y1_Mouse2, Y1_Mouse3,
 	P2_11, P2_12, P2_13, P2_21, P2_22, P2_23, P2_31, P2_32, P2_33, X1_Cat1, X1_Cat2, X1_Cat3, Y1_Cat1, Y1_Cat2, Y1_Cat3,
@@ -392,7 +393,7 @@ begin
 			 ((hc >= 450 and hc <= 680) and (vc >= 340 and vc <= 350))  or 
 			(((hc >= 450 and hc <= 455) or  (hc >= 525 and hc <= 530)	or  (hc >= 600 and hc <= 605)	or  (hc >= 675 and hc <= 680))  and (vc >= 350 and vc <= 460))  or 
 			 ((hc >= 450 and hc <= 680) and (vc >= 460 and vc <= 470)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and Winner3 = 0 and Draw3 = 0) then
 			red <= "1000";
 			blue <= "1100";
 			green <= "0000"; 
@@ -409,7 +410,7 @@ begin
 			 ((hc >= 375 and hc <= 755) and (vc >= 490 and vc <= 495))  or 
 			(((hc >= 375 and hc <= 380) or  (hc >= 450 and hc <= 455)	or  (hc >= 525 and hc <= 530)	or  (hc >= 600 and hc <= 605)	or  (hc >= 675 and hc <= 680)	or  (hc >= 750 and hc <= 755))  and (vc >= 495 and vc <= 605))  or
 			 ((hc >= 375 and hc <= 755) and (vc >= 605 and vc <= 610)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Winner = 0 and Draw = 0) then
 			red <= "1000";
 			blue <= "1100";
 			green <= "0000";
@@ -423,7 +424,7 @@ begin
 			(((hc >= 200 and hc <= 206) or  (hc >= 236 and hc <= 242)	or	(hc >= 254 and hc <= 260)	or	(hc >= 266 and hc <= 272)	or	(hc >= 284 and hc <= 290)	or	(hc >= 296 and hc <= 302)	or	(hc >= 314 and hc <= 320)	or	(hc >= 344 and hc <= 350)	or	(hc >= 356 and hc <= 362)) 	and (vc >= 160 and vc <= 170))  or 
 			(((hc >= 200 and hc <= 206) or  (hc >= 224 and hc <= 230)	or	(hc >= 236 and hc <= 242)	or	(hc >= 254 and hc <= 260)	or	(hc >= 266 and hc <= 272)	or	(hc >= 284 and hc <= 290)	or	(hc >= 296 and hc <= 302)	or	(hc >= 314 and hc <= 320)	or	(hc >= 344 and hc <= 350)	or	(hc >= 356 and hc <= 362)	or	(hc >= 374 and hc <= 380)) 	and (vc >= 170 and vc <= 180))  or 
 			(((hc >= 206 and hc <= 224) or  (hc >= 236 and hc <= 242)	or	(hc >= 254 and hc <= 260)	or	(hc >= 272 and hc <= 284)	or	(hc >= 302 and hc <= 314)	or	(hc >= 326 and hc <= 344)	or	(hc >= 362 and hc <= 380)) 	and (vc >= 180 and vc <= 190)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -436,7 +437,7 @@ begin
 			(((hc >= 200 and hc <= 206) or  (hc >= 218 and hc <= 224)	or	(hc >= 260 and hc <= 266)	or	(hc >= 272 and hc <= 278)	or	(hc >= 290 and hc <= 296)	or	(hc >= 302 and hc <= 308)	or	(hc >= 320 and hc <= 326)	or	(hc >= 332 and hc <= 338)	or	(hc >= 350 and hc <= 356)	or	(hc >= 362 and hc <= 368)	or	(hc >= 380 and hc <= 386)) 	and (vc >= 260 and vc <= 270))  or 
 			(((hc >= 206 and hc <= 224) or  (hc >= 242 and hc <= 260)	or	(hc >= 272 and hc <= 290)	or	(hc >= 308 and hc <= 326)	or	(hc >= 338 and hc <= 350)	or	(hc >= 368 and hc <= 386)) 	and (vc >= 270 and vc <= 280))  or 
 			 ((hc >= 272 and hc <= 278)	and (vc >= 280 and vc <= 310)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -452,35 +453,35 @@ begin
 			(((hc >= 200 and hc <= 206) or  (hc >= 236 and hc <= 242)	or	(hc >= 254 and hc <= 272)	or	(hc >= 284 and hc <= 302)	or	(hc >= 314 and hc <= 332)	or	(hc >= 338 and hc <= 344)) 	and (vc >= 390 and vc <= 400)) 	or
 			 ((hc >= 296 and hc <= 302)	and (vc >= 400 and vc <= 420))	or
 			 ((hc >= 278 and hc <= 296)	and (vc >= 420 and vc <= 430)))	
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111"; 
 		
 		-- "No 2" Message 3x3	
 		elsif((((hc >= 380 and hc <= 398) and (vc >= 320 and vc <= 330)) or
-			(((hc >= 374 and hc <= 380) or  (hc >= 398 and hc <= 404))	and (vc >= 330 and vc <= 340))  	or
+			(((hc >= 374 and hc <= 380) or  (hc >= 398 and hc <= 404))	and (vc >= 330 and vc <= 340))  or
 			 ((hc >= 398 and hc <= 404) and (vc >= 340 and vc <= 350))  or 
 			 ((hc >= 392 and hc <= 398) and (vc >= 350 and vc <= 360)) 	or
 			 ((hc >= 386 and hc <= 392) and (vc >= 360 and vc <= 370))  or
 			 ((hc >= 380 and hc <= 386) and (vc >= 370 and vc <= 380)) 	or
 			 ((hc >= 374 and hc <= 380) and (vc >= 380 and vc <= 390))	or
 			 ((hc >= 374 and hc <= 404) and (vc >= 390 and vc <= 400)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and Turn ='0' and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and Turn ='0' and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
 			
 		-- "No 1" Message 3x3	
 		elsif((((hc >= 380 and hc <= 392) and (vc >= 320 and vc <= 330)) or
-			(((hc >= 374 and hc <= 380) or  (hc >= 386 and hc <= 392))	and (vc >= 330 and vc <= 340))  	or
+			(((hc >= 374 and hc <= 380) or  (hc >= 386 and hc <= 392))	and (vc >= 330 and vc <= 340))  or
 			 ((hc >= 386 and hc <= 392) and (vc >= 340 and vc <= 350))  or 
 			 ((hc >= 386 and hc <= 392) and (vc >= 350 and vc <= 360)) 	or
 			 ((hc >= 386 and hc <= 392) and (vc >= 360 and vc <= 370))  or
 			 ((hc >= 386 and hc <= 392) and (vc >= 370 and vc <= 380)) 	or
 			 ((hc >= 386 and hc <= 392) and (vc >= 380 and vc <= 390))	or
 			 ((hc >= 374 and hc <= 404) and (vc >= 390 and vc <= 400)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and Turn ='1' and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and Turn ='1' and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -496,7 +497,7 @@ begin
 			(((hc >= 12 + X1_Origin + X1_Rise and hc <= 24 + X1_Origin + X1_Rise) or  (hc >= 30 + X1_Origin + X1_Rise	and hc <= 36 + X1_Origin + X1_Rise) 	or  (hc >= 42 + X1_Origin + X1_Rise and hc <= 54 + X1_Origin + X1_Rise))	and (vc >= 80 + Y1_Origin + Y1_Rise and vc <= 90 + Y1_Origin + Y1_Rise)) or
 			(((hc >= 18 + X1_Origin + X1_Rise and hc <= 24 + X1_Origin + X1_Rise) or  (hc >= 42 + X1_Origin + X1_Rise	and hc <= 48 + X1_Origin + X1_Rise)) and	(vc >= 90 + Y1_Origin + Y1_Rise and vc <= 100 + Y1_Origin + Y1_Rise))	or
 			 ((hc >= 30 + X1_Origin + X1_Rise and hc <= 36 + X1_Origin + X1_Rise) and (vc >= 100 + Y1_Origin + Y1_Rise and vc <= 110 + Y1_Origin + Y1_Rise)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and Turn ='1' and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and Turn ='1' and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -511,7 +512,7 @@ begin
 			(((hc >  9  + X1_Origin + X1_Rise and hc <  15 + X1_Origin + X1_Rise) or  (hc >= 21 + X1_Origin + X1_Rise and hc <  27 + X1_Origin + X1_Rise)	or	(hc >= 33 + X1_Origin + X1_Rise and hc <  39 + X1_Origin + X1_Rise)	 or (hc >= 45 + X1_Origin + X1_Rise and hc < 51 + X1_Origin + X1_Rise)	or	(hc > 57 + X1_Origin + X1_Rise and hc < 63 + X1_Origin + X1_Rise))	and (vc >= 70 + Y1_Origin + Y1_Rise and vc <= 80 + Y1_Origin + Y1_Rise)) or
 			(((hc >  9  + X1_Origin + X1_Rise and hc <  15 + X1_Origin + X1_Rise) or  (hc >  57 + X1_Origin + X1_Rise and hc <  63 + X1_Origin + X1_Rise))  and (vc >  80 + Y1_Origin + Y1_Rise and vc <  90 + Y1_Origin + Y1_Rise)) or
 			(((hc >= 15 + X1_Origin + X1_Rise and hc <= 21 + X1_Origin + X1_Rise) or  (hc >= 51 + X1_Origin + X1_Rise and hc <= 57 + X1_Origin + X1_Rise)) 	and (vc >= 90 + Y1_Origin + Y1_Rise and vc < 100 + Y1_Origin + Y1_Rise)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and Turn ='0' and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and Turn ='0' and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -527,7 +528,7 @@ begin
 			(((hc >= 12 + X1_Mouse1 and hc <= 24 + X1_Mouse1) or  (hc >= 30 + X1_Mouse1	and hc <= 36 + X1_Mouse1) 	or  (hc >= 42 + X1_Mouse1 and hc <= 54 + X1_Mouse1))	and (vc >= 80 + Y1_Mouse1 and vc <= 90 + Y1_Mouse1)) or
 			(((hc >= 18 + X1_Mouse1 and hc <= 24 + X1_Mouse1) or  (hc >= 42 + X1_Mouse1	and hc <= 48 + X1_Mouse1)) and	(vc >= 90 + Y1_Mouse1 and vc <= 100 + Y1_Mouse1))	or
 			 ((hc >= 30 + X1_Mouse1 and hc <= 36 + X1_Mouse1) and (vc >= 100 + Y1_Mouse1 and vc <= 110 + Y1_Mouse1)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_11 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_11 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -543,7 +544,7 @@ begin
 			(((hc >= 12 + X1_Mouse1 and hc <= 24 + X1_Mouse1) or  (hc >= 30 + X1_Mouse1	and hc <= 36 + X1_Mouse1) 	or  (hc >= 42 + X1_Mouse1 and hc <= 54 + X1_Mouse1))	and (vc >= 80 + Y1_Mouse2 and vc <= 90 + Y1_Mouse2)) or
 			(((hc >= 18 + X1_Mouse1 and hc <= 24 + X1_Mouse1) or  (hc >= 42 + X1_Mouse1	and hc <= 48 + X1_Mouse1)) and	(vc >= 90 + Y1_Mouse2 and vc <= 100 + Y1_Mouse2))	or
 			 ((hc >= 30 + X1_Mouse1 and hc <= 36 + X1_Mouse1) and (vc >= 100 + Y1_Mouse2 and vc <= 110 + Y1_Mouse2)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_12 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_12 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -559,7 +560,7 @@ begin
 			(((hc >= 12 + X1_Mouse1 and hc <= 24 + X1_Mouse1) or  (hc >= 30 + X1_Mouse1	and hc <= 36 + X1_Mouse1) 	or  (hc >= 42 + X1_Mouse1 and hc <= 54 + X1_Mouse1))	and (vc >= 80 + Y1_Mouse3 and vc <= 90 + Y1_Mouse3)) or
 			(((hc >= 18 + X1_Mouse1 and hc <= 24 + X1_Mouse1) or  (hc >= 42 + X1_Mouse1	and hc <= 48 + X1_Mouse1)) and	(vc >= 90 + Y1_Mouse3 and vc <= 100 + Y1_Mouse3))	or
 			 ((hc >= 30 + X1_Mouse1 and hc <= 36 + X1_Mouse1) and (vc >= 100 + Y1_Mouse3 and vc <= 110 + Y1_Mouse3)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_13 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_13 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -575,7 +576,7 @@ begin
 			(((hc >= 12 + X1_Mouse2 and hc <= 24 + X1_Mouse2) or  (hc >= 30 + X1_Mouse2	and hc <= 36 + X1_Mouse2) 	or  (hc >= 42 + X1_Mouse2 and hc <= 54 + X1_Mouse2))	and (vc >= 80 + Y1_Mouse1 and vc <= 90 + Y1_Mouse1)) or
 			(((hc >= 18 + X1_Mouse2 and hc <= 24 + X1_Mouse2) or  (hc >= 42 + X1_Mouse2	and hc <= 48 + X1_Mouse2)) and	(vc >= 90 + Y1_Mouse1 and vc <= 100 + Y1_Mouse1))	or
 			 ((hc >= 30 + X1_Mouse2 and hc <= 36 + X1_Mouse2) and (vc >= 100 + Y1_Mouse1 and vc <= 110 + Y1_Mouse1)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_21 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_21 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -591,7 +592,7 @@ begin
 			(((hc >= 12 + X1_Mouse2 and hc <= 24 + X1_Mouse2) or  (hc >= 30 + X1_Mouse2	and hc <= 36 + X1_Mouse2) 	or  (hc >= 42 + X1_Mouse2 and hc <= 54 + X1_Mouse2))	and (vc >= 80 + Y1_Mouse2 and vc <= 90 + Y1_Mouse2)) or
 			(((hc >= 18 + X1_Mouse2 and hc <= 24 + X1_Mouse2) or  (hc >= 42 + X1_Mouse2	and hc <= 48 + X1_Mouse2)) and	(vc >= 90 + Y1_Mouse2 and vc <= 100 + Y1_Mouse2))	or
 			 ((hc >= 30 + X1_Mouse2 and hc <= 36 + X1_Mouse2) and (vc >= 100 + Y1_Mouse2 and vc <= 110 + Y1_Mouse2)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_22 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_22 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -607,7 +608,7 @@ begin
 			(((hc >= 12 + X1_Mouse2 and hc <= 24 + X1_Mouse2) or  (hc >= 30 + X1_Mouse2	and hc <= 36 + X1_Mouse2) 	or  (hc >= 42 + X1_Mouse2 and hc <= 54 + X1_Mouse2))	and (vc >= 80 + Y1_Mouse3 and vc <= 90 + Y1_Mouse3)) or
 			(((hc >= 18 + X1_Mouse2 and hc <= 24 + X1_Mouse2) or  (hc >= 42 + X1_Mouse2	and hc <= 48 + X1_Mouse2)) and	(vc >= 90 + Y1_Mouse3 and vc <= 100 + Y1_Mouse3))	or
 			 ((hc >= 30 + X1_Mouse2 and hc <= 36 + X1_Mouse2) and (vc >= 100 + Y1_Mouse3 and vc <= 110 + Y1_Mouse3)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_23 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_23 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -623,7 +624,7 @@ begin
 			(((hc >= 12 + X1_Mouse3 and hc <= 24 + X1_Mouse3) or  (hc >= 30 + X1_Mouse3	and hc <= 36 + X1_Mouse3) 	or  (hc >= 42 + X1_Mouse3 and hc <= 54 + X1_Mouse3))	and (vc >= 80 + Y1_Mouse1 and vc <= 90 + Y1_Mouse1)) or
 			(((hc >= 18 + X1_Mouse3 and hc <= 24 + X1_Mouse3) or  (hc >= 42 + X1_Mouse3	and hc <= 48 + X1_Mouse3)) and	(vc >= 90 + Y1_Mouse1 and vc <= 100 + Y1_Mouse1))	or
 			 ((hc >= 30 + X1_Mouse3 and hc <= 36 + X1_Mouse3) and (vc >= 100 + Y1_Mouse1 and vc <= 110 + Y1_Mouse1)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_31 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_31 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -639,7 +640,7 @@ begin
 			(((hc >= 12 + X1_Mouse3 and hc <= 24 + X1_Mouse3) or  (hc >= 30 + X1_Mouse3	and hc <= 36 + X1_Mouse3) 	or  (hc >= 42 + X1_Mouse3 and hc <= 54 + X1_Mouse3))	and (vc >= 80 + Y1_Mouse2 and vc <= 90 + Y1_Mouse2)) or
 			(((hc >= 18 + X1_Mouse3 and hc <= 24 + X1_Mouse3) or  (hc >= 42 + X1_Mouse3	and hc <= 48 + X1_Mouse3)) and	(vc >= 90 + Y1_Mouse2 and vc <= 100 + Y1_Mouse2))	or
 			 ((hc >= 30 + X1_Mouse3 and hc <= 36 + X1_Mouse3) and (vc >= 100 + Y1_Mouse2 and vc <= 110 + Y1_Mouse2)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_32 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_32 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -655,7 +656,7 @@ begin
 			(((hc >= 12 + X1_Mouse3 and hc <= 24 + X1_Mouse3) or  (hc >= 30 + X1_Mouse3	and hc <= 36 + X1_Mouse3) 	or  (hc >= 42 + X1_Mouse3 and hc <= 54 + X1_Mouse3))	and (vc >= 80 + Y1_Mouse3 and vc <= 90 + Y1_Mouse3)) or
 			(((hc >= 18 + X1_Mouse3 and hc <= 24 + X1_Mouse3) or  (hc >= 42 + X1_Mouse3	and hc <= 48 + X1_Mouse3)) and	(vc >= 90 + Y1_Mouse3 and vc <= 100 + Y1_Mouse3))	or
 			 ((hc >= 30 + X1_Mouse3 and hc <= 36 + X1_Mouse3) and (vc >= 100 + Y1_Mouse3 and vc <= 110 + Y1_Mouse3)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_33 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P1_33 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -670,7 +671,7 @@ begin
 			(((hc >  9  + X1_Cat1 and hc <  15 + X1_Cat1) or  (hc >= 21 + X1_Cat1 and hc <  27 + X1_Cat1)	or	(hc >= 33 + X1_Cat1 and hc <  39 + X1_Cat1)	 or	 (hc >= 45 + X1_Cat1 and hc <  51 + X1_Cat1)	or	(hc > 57 + X1_Cat1 and hc < 63 + X1_Cat1))	and (vc >= 70 + Y1_Cat1 and vc <= 80 + Y1_Cat1)) or
 			(((hc >  9  + X1_Cat1 and hc <  15 + X1_Cat1) or  (hc >  57 + X1_Cat1 and hc <  63 + X1_Cat1))  and (vc >  80 + Y1_Cat1 and vc <  90 + Y1_Cat1)) or
 			(((hc >= 15 + X1_Cat1 and hc <= 21 + X1_Cat1) or  (hc >= 51 + X1_Cat1 and hc <= 57 + X1_Cat1)) 	and (vc >= 90 + Y1_Cat1 and vc < 100 + Y1_Cat1)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_11 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_11 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -685,7 +686,7 @@ begin
 			(((hc >  9  + X1_Cat1 and hc <  15 + X1_Cat1) or  (hc >= 21 + X1_Cat1 and hc <  27 + X1_Cat1)	or	(hc >= 33 + X1_Cat1 and hc <  39 + X1_Cat1)	 or	 (hc >= 45 + X1_Cat1 and hc <  51 + X1_Cat1)	or	(hc > 57 + X1_Cat1 and hc < 63 + X1_Cat1))	and (vc >= 70 + Y1_Cat2 and vc <= 80 + Y1_Cat2)) or
 			(((hc >  9  + X1_Cat1 and hc <  15 + X1_Cat1) or  (hc >  57 + X1_Cat1 and hc <  63 + X1_Cat1))  and (vc >  80 + Y1_Cat2 and vc <  90 + Y1_Cat2)) or
 			(((hc >= 15 + X1_Cat1 and hc <= 21 + X1_Cat1) or  (hc >= 51 + X1_Cat1 and hc <= 57 + X1_Cat1)) 	and (vc >= 90 + Y1_Cat2 and vc < 100 + Y1_Cat2)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_12 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_12 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -700,7 +701,7 @@ begin
 			(((hc >  9  + X1_Cat1 and hc <  15 + X1_Cat1) or  (hc >= 21 + X1_Cat1 and hc <  27 + X1_Cat1)	or	(hc >= 33 + X1_Cat1 and hc <  39 + X1_Cat1)	 or	 (hc >= 45 + X1_Cat1 and hc <  51 + X1_Cat1)	or	(hc > 57 + X1_Cat1 and hc < 63 + X1_Cat1))	and (vc >= 70 + Y1_Cat3 and vc <= 80 + Y1_Cat3)) or
 			(((hc >  9  + X1_Cat1 and hc <  15 + X1_Cat1) or  (hc >  57 + X1_Cat1 and hc <  63 + X1_Cat1))  and (vc >  80 + Y1_Cat3 and vc <  90 + Y1_Cat3)) or
 			(((hc >= 15 + X1_Cat1 and hc <= 21 + X1_Cat1) or  (hc >= 51 + X1_Cat1 and hc <= 57 + X1_Cat1)) 	and (vc >= 90 + Y1_Cat3 and vc < 100 + Y1_Cat3)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_13 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_13 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -715,7 +716,7 @@ begin
 			(((hc >  9  + X1_Cat2 and hc <  15 + X1_Cat2) or  (hc >= 21 + X1_Cat2 and hc <  27 + X1_Cat2)	or	(hc >= 33 + X1_Cat2 and hc <  39 + X1_Cat2)	 or	 (hc >= 45 + X1_Cat2 and hc <  51 + X1_Cat2)	or	(hc > 57 + X1_Cat2 and hc < 63 + X1_Cat2))	and (vc >= 70 + Y1_Cat1 and vc <= 80 + Y1_Cat1)) or
 			(((hc >  9  + X1_Cat2 and hc <  15 + X1_Cat2) or  (hc >  57 + X1_Cat2 and hc <  63 + X1_Cat2))  and (vc >  80 + Y1_Cat1 and vc <  90 + Y1_Cat1)) or
 			(((hc >= 15 + X1_Cat2 and hc <= 21 + X1_Cat2) or  (hc >= 51 + X1_Cat2 and hc <= 57 + X1_Cat2)) 	and (vc >= 90 + Y1_Cat1 and vc < 100 + Y1_Cat1)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_21 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_21 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -730,7 +731,7 @@ begin
 			(((hc >  9  + X1_Cat2 and hc <  15 + X1_Cat2) or  (hc >= 21 + X1_Cat2 and hc <  27 + X1_Cat2)	or	(hc >= 33 + X1_Cat2 and hc <  39 + X1_Cat2)	 or	 (hc >= 45 + X1_Cat2 and hc <  51 + X1_Cat2)	or	(hc > 57 + X1_Cat2 and hc < 63 + X1_Cat2))	and (vc >= 70 + Y1_Cat2 and vc <= 80 + Y1_Cat2)) or
 			(((hc >  9  + X1_Cat2 and hc <  15 + X1_Cat2) or  (hc >  57 + X1_Cat2 and hc <  63 + X1_Cat2))  and (vc >  80 + Y1_Cat2 and vc <  90 + Y1_Cat2)) or
 			(((hc >= 15 + X1_Cat2 and hc <= 21 + X1_Cat2) or  (hc >= 51 + X1_Cat2 and hc <= 57 + X1_Cat2)) 	and (vc >= 90 + Y1_Cat2 and vc < 100 + Y1_Cat2)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_22 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_22 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -745,7 +746,7 @@ begin
 			(((hc >  9  + X1_Cat2 and hc <  15 + X1_Cat2) or  (hc >= 21 + X1_Cat2 and hc <  27 + X1_Cat2)	or	(hc >= 33 + X1_Cat2 and hc <  39 + X1_Cat2)	 or	 (hc >= 45 + X1_Cat2 and hc <  51 + X1_Cat2)	or	(hc > 57 + X1_Cat2 and hc < 63 + X1_Cat2))	and (vc >= 70 + Y1_Cat3 and vc <= 80 + Y1_Cat3)) or
 			(((hc >  9  + X1_Cat2 and hc <  15 + X1_Cat2) or  (hc >  57 + X1_Cat2 and hc <  63 + X1_Cat2))  and (vc >  80 + Y1_Cat3 and vc <  90 + Y1_Cat3)) or
 			(((hc >= 15 + X1_Cat2 and hc <= 21 + X1_Cat2) or  (hc >= 51 + X1_Cat2 and hc <= 57 + X1_Cat2)) 	and (vc >= 90 + Y1_Cat3 and vc < 100 + Y1_Cat3)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_23 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_23 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -760,7 +761,7 @@ begin
 			(((hc >  9  + X1_Cat3 and hc <  15 + X1_Cat3) or  (hc >= 21 + X1_Cat3 and hc <  27 + X1_Cat3)	or	(hc >= 33 + X1_Cat3 and hc <  39 + X1_Cat3)	 or	 (hc >= 45 + X1_Cat3 and hc <  51 + X1_Cat3)	or	(hc > 57 + X1_Cat3 and hc < 63 + X1_Cat3))	and (vc >= 70 + Y1_Cat1 and vc <= 80 + Y1_Cat1)) or
 			(((hc >  9  + X1_Cat3 and hc <  15 + X1_Cat3) or  (hc >  57 + X1_Cat3 and hc <  63 + X1_Cat3))  and (vc >  80 + Y1_Cat1 and vc <  90 + Y1_Cat1)) or
 			(((hc >= 15 + X1_Cat3 and hc <= 21 + X1_Cat3) or  (hc >= 51 + X1_Cat3 and hc <= 57 + X1_Cat3)) 	and (vc >= 90 + Y1_Cat1 and vc < 100 + Y1_Cat1)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_31 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_31 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -775,7 +776,7 @@ begin
 			(((hc >  9  + X1_Cat3 and hc <  15 + X1_Cat3) or  (hc >= 21 + X1_Cat3 and hc <  27 + X1_Cat3)	or	(hc >= 33 + X1_Cat3 and hc <  39 + X1_Cat3)	 or	 (hc >= 45 + X1_Cat3 and hc <  51 + X1_Cat3)	or	(hc > 57 + X1_Cat3 and hc < 63 + X1_Cat3))	and (vc >= 70 + Y1_Cat2 and vc <= 80 + Y1_Cat2)) or
 			(((hc >  9  + X1_Cat3 and hc <  15 + X1_Cat3) or  (hc >  57 + X1_Cat3 and hc <  63 + X1_Cat3))  and (vc >  80 + Y1_Cat2 and vc <  90 + Y1_Cat2)) or
 			(((hc >= 15 + X1_Cat3 and hc <= 21 + X1_Cat3) or  (hc >= 51 + X1_Cat3 and hc <= 57 + X1_Cat3)) 	and (vc >= 90 + Y1_Cat2 and vc < 100 + Y1_Cat2)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_32 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_32 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -790,7 +791,7 @@ begin
 			(((hc >  9  + X1_Cat3 and hc <  15 + X1_Cat3) or  (hc >= 21 + X1_Cat3 and hc <  27 + X1_Cat3)	or	(hc >= 33 + X1_Cat3 and hc <  39 + X1_Cat3)	 or	 (hc >= 45 + X1_Cat3 and hc <  51 + X1_Cat3)	or	(hc > 57 + X1_Cat3 and hc < 63 + X1_Cat3))	and (vc >= 70 + Y1_Cat3 and vc <= 80 + Y1_Cat3)) or
 			(((hc >  9  + X1_Cat3 and hc <  15 + X1_Cat3) or  (hc >  57 + X1_Cat3 and hc <  63 + X1_Cat3))  and (vc >  80 + Y1_Cat3 and vc <  90 + Y1_Cat3)) or
 			(((hc >= 15 + X1_Cat3 and hc <= 21 + X1_Cat3) or  (hc >= 51 + X1_Cat3 and hc <= 57 + X1_Cat3)) 	and (vc >= 90 + Y1_Cat3 and vc < 100 + Y1_Cat3)))
-			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_33 = 1 and Winner3 = 0) then
+			and videoON = '1' and juego25 = '0' and juego9 = '1' and P2_33 = 1 and Winner3 = 0 and Draw3 = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -804,7 +805,7 @@ begin
 			(((hc >= 200 - 30 and hc <= 206 - 30) or  (hc >= 236 - 30 and hc <= 242 - 30)	or	(hc >= 254 - 30 and hc <= 260 - 30)	or	(hc >= 266 - 30 and hc <= 272 - 30)	or	(hc >= 284 - 30 and hc <= 290 - 30)	or	(hc >= 296 - 30 and hc <= 302 - 30)	or	(hc >= 314 - 30 and hc <= 320 - 30)	or	(hc >= 344 - 30 and hc <= 350 - 30)	or	(hc >= 356 - 30 and hc <= 362 - 30)) 	and (vc >= 160 and vc <= 170))  or 
 			(((hc >= 200 - 30 and hc <= 206 - 30) or  (hc >= 224 - 30 and hc <= 230 - 30)	or	(hc >= 236 - 30 and hc <= 242 - 30)	or	(hc >= 254 - 30 and hc <= 260 - 30)	or	(hc >= 266 - 30 and hc <= 272 - 30)	or	(hc >= 284 - 30 and hc <= 290 - 30)	or	(hc >= 296 - 30 and hc <= 302 - 30)	or	(hc >= 314 - 30 and hc <= 320 - 30)	or	(hc >= 344 - 30 and hc <= 350 - 30)		or	(hc >= 356 - 30 and hc <= 362 - 30)	or	(hc >= 374 - 30 and hc <= 380 - 30)) 	and (vc >= 170 and vc <= 180))  or 
 			(((hc >= 206 - 30 and hc <= 224 - 30) or  (hc >= 236 - 30 and hc <= 242 - 30)	or	(hc >= 254 - 30 and hc <= 260 - 30)	or	(hc >= 272 - 30 and hc <= 284 - 30)	or	(hc >= 302 - 30 and hc <= 314 - 30)	or	(hc >= 326 - 30 and hc <= 344 - 30)	or	(hc >= 362 - 30 and hc <= 380 - 30)) 	and (vc >= 180 and vc <= 190)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -817,7 +818,7 @@ begin
 			(((hc >= 200 - 30 and hc <= 206 - 30) or  (hc >= 218 - 30 and hc <= 224 - 30)	or	(hc >= 260 - 30 and hc <= 266 - 30)	or	(hc >= 272 - 30 and hc <= 278 - 30)	or	(hc >= 290 - 30 and hc <= 296 - 30)	or	(hc >= 302 - 30 and hc <= 308 - 30)	or	(hc >= 320 - 30 and hc <= 326 - 30)	  or	(hc >= 332 - 30 and hc <= 338 - 30)	or	(hc >= 350 - 30 and hc <= 356 - 30)		or	(hc >= 362 - 30 and hc <= 368 - 30)	or	(hc >= 380 - 30 and hc <= 386 - 30)) 	and (vc >= 260 and vc <= 270))  or 
 			(((hc >= 206 - 30 and hc <= 224 - 30) or  (hc >= 242 - 30 and hc <= 260 - 30)	or	(hc >= 272 - 30 and hc <= 290 - 30)	or	(hc >= 308 - 30 and hc <= 326 - 30)	or	(hc >= 338 - 30 and hc <= 350 - 30)	or	(hc >= 368 - 30 and hc <= 386 - 30))and (vc >= 270 and vc <= 280))  or 
 			 ((hc >= 272 - 30 and hc <= 278 - 30) and (vc >= 280 - 30 and vc <= 310)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -833,7 +834,7 @@ begin
 			(((hc >= 200 - 30 and hc <= 206 - 30) or  (hc >= 236 - 30 and hc <= 242 - 30)	or	(hc >= 254 - 30 and hc <= 272 - 30)	or	(hc >= 284 - 30 and hc <= 302 - 30)	or	(hc >= 314 - 30 and hc <= 332 - 30)	or	(hc >= 338 - 30 and hc <= 344 - 30)) 	and (vc >= 390 and vc <= 400)) 	or
 			 ((hc >= 296 - 30 and hc <= 302 - 30)	and (vc >= 400 and vc <= 420))	or
 			 ((hc >= 278 - 30 and hc <= 296 - 30)	and (vc >= 420 and vc <= 430)))	
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111"; 
@@ -847,7 +848,7 @@ begin
 			 ((hc >= 380 - 40 and hc <= 386 - 40) and (vc >= 370 and vc <= 380)) 	or
 			 ((hc >= 374 - 40 and hc <= 380 - 40) and (vc >= 380 and vc <= 390))	or
 			 ((hc >= 374 - 40 and hc <= 404 - 40) and (vc >= 390 and vc <= 400)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn ='0' and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn ='0' and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -861,7 +862,7 @@ begin
 			 ((hc >= 386 - 40 and hc <= 392 - 40) and (vc >= 370 and vc <= 380)) 	or
 			 ((hc >= 386 - 40 and hc <= 392 - 40) and (vc >= 380 and vc <= 390))	or
 			 ((hc >= 374 - 40 and hc <= 404 - 40) and (vc >= 390 and vc <= 400)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn ='1' and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn ='1' and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111"; 
@@ -877,7 +878,7 @@ begin
 			(((hc >= 12 + X2_Origin + X2_Rise and hc <= 24 + X2_Origin + X2_Rise) or  (hc >= 30 + X2_Origin + X2_Rise	and hc <= 36 + X2_Origin + X2_Rise)  or  (hc >= 42 + X2_Origin + X2_Rise and hc <= 54 + X2_Origin + X2_Rise))	and (vc >= 80 + Y2_Origin + Y2_Rise and vc <= 90 + Y2_Origin + Y2_Rise)) or
 			(((hc >= 18 + X2_Origin + X2_Rise and hc <= 24 + X2_Origin + X2_Rise) or  (hc >= 42 + X2_Origin + X2_Rise	and hc <= 48 + X2_Origin + X2_Rise)) and (vc >= 90 + Y2_Origin + Y2_Rise and vc <= 100 + Y2_Origin + Y2_Rise))	or
 			 ((hc >= 30 + X2_Origin + X2_Rise and hc <= 36 + X2_Origin + X2_Rise) and (vc >= 100 + Y2_Origin + Y2_Rise and vc <= 110 + Y2_Origin + Y2_Rise)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn5 ='1' and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn5 ='1' and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -892,7 +893,7 @@ begin
 			(((hc >  9  + X2_Origin + X2_Rise and hc <  15 + X2_Origin + X2_Rise) or  (hc >= 21 + X2_Origin + X2_Rise and hc <  27 + X2_Origin + X2_Rise)	or	(hc >= 33 + X2_Origin + X2_Rise and hc <  39 + X2_Origin + X2_Rise)	 or (hc >= 45 + X2_Origin + X2_Rise and hc < 51 + X2_Origin + X2_Rise)	or	(hc > 57 + X2_Origin + X2_Rise and hc < 63 + X2_Origin + X2_Rise))	and (vc >= 70 + Y2_Origin + Y2_Rise and vc <= 80 + Y2_Origin + Y2_Rise)) or
 			(((hc >  9  + X2_Origin + X2_Rise and hc <  15 + X2_Origin + X2_Rise) or  (hc >  57 + X2_Origin + X2_Rise and hc <  63 + X2_Origin + X2_Rise))  and (vc >  80 + Y2_Origin + Y2_Rise and vc <  90 + Y2_Origin + Y2_Rise)) or
 			(((hc >= 15 + X2_Origin + X2_Rise and hc <= 21 + X2_Origin + X2_Rise) or  (hc >= 51 + X2_Origin + X2_Rise and hc <= 57 + X2_Origin + X2_Rise)) 	and (vc >= 90 + Y2_Origin + Y2_Rise and vc < 100 + Y2_Origin + Y2_Rise)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn5 ='0' and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn5 ='0' and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "1111";
 			green <= "1111";
@@ -908,7 +909,7 @@ begin
 			(((hc >= 12 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 30 + X2_Mouse1	and hc <= 36 + X2_Mouse1)	or  (hc >= 42 + X2_Mouse1 and hc <= 54 + X2_Mouse1))	and (vc >= 80 + Y2_Mouse1 and vc <= 90 + Y2_Mouse1)) or
 			(((hc >= 18 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 42 + X2_Mouse1	and hc <= 48 + X2_Mouse1))	and (vc >= 90 + Y2_Mouse1 and vc <= 100 + Y2_Mouse1))	or
 			 ((hc >= 30 + X2_Mouse1 and hc <= 36 + X2_Mouse1) and (vc >= 100 + Y2_Mouse1 and vc <= 110 + Y2_Mouse1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_11 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_11 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -924,7 +925,7 @@ begin
 			(((hc >= 12 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 30 + X2_Mouse2	and hc <= 36 + X2_Mouse2)	or  (hc >= 42 + X2_Mouse2 and hc <= 54 + X2_Mouse2))	and (vc >= 80 + Y2_Mouse1 and vc <= 90 + Y2_Mouse1)) or
 			(((hc >= 18 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 42 + X2_Mouse2	and hc <= 48 + X2_Mouse2))	and (vc >= 90 + Y2_Mouse1 and vc <= 100 + Y2_Mouse1))	or
 			 ((hc >= 30 + X2_Mouse2 and hc <= 36 + X2_Mouse2) and (vc >= 100 + Y2_Mouse1 and vc <= 110 + Y2_Mouse1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_21 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_21 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -940,7 +941,7 @@ begin
 			(((hc >= 12 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 30 + X2_Mouse3	and hc <= 36 + X2_Mouse3)	or  (hc >= 42 + X2_Mouse3 and hc <= 54 + X2_Mouse3))	and (vc >= 80 + Y2_Mouse1 and vc <= 90 + Y2_Mouse1)) or
 			(((hc >= 18 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 42 + X2_Mouse3	and hc <= 48 + X2_Mouse3))	and (vc >= 90 + Y2_Mouse1 and vc <= 100 + Y2_Mouse1))	or
 			 ((hc >= 30 + X2_Mouse3 and hc <= 36 + X2_Mouse3) and (vc >= 100 + Y2_Mouse1 and vc <= 110 + Y2_Mouse1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_31 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_31 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111"; 
@@ -956,7 +957,7 @@ begin
 			(((hc >= 12 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 30 + X2_Mouse4	and hc <= 36 + X2_Mouse4)	or  (hc >= 42 + X2_Mouse4 and hc <= 54 + X2_Mouse4))	and (vc >= 80 + Y2_Mouse1 and vc <= 90 + Y2_Mouse1)) or
 			(((hc >= 18 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 42 + X2_Mouse4	and hc <= 48 + X2_Mouse4))	and (vc >= 90 + Y2_Mouse1 and vc <= 100 + Y2_Mouse1))	or
 			 ((hc >= 30 + X2_Mouse4 and hc <= 36 + X2_Mouse4) and (vc >= 100 + Y2_Mouse1 and vc <= 110 + Y2_Mouse1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_41 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_41 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -972,7 +973,7 @@ begin
 			(((hc >= 12 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 30 + X2_Mouse5	and hc <= 36 + X2_Mouse5)	or  (hc >= 42 + X2_Mouse5 and hc <= 54 + X2_Mouse5))	and (vc >= 80 + Y2_Mouse1 and vc <= 90 + Y2_Mouse1)) or
 			(((hc >= 18 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 42 + X2_Mouse5	and hc <= 48 + X2_Mouse5))	and (vc >= 90 + Y2_Mouse1 and vc <= 100 + Y2_Mouse1))	or
 			 ((hc >= 30 + X2_Mouse5 and hc <= 36 + X2_Mouse5) and (vc >= 100 + Y2_Mouse1 and vc <= 110 + Y2_Mouse1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_51 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_51 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -988,7 +989,7 @@ begin
 			(((hc >= 12 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 30 + X2_Mouse1	and hc <= 36 + X2_Mouse1)	or  (hc >= 42 + X2_Mouse1 and hc <= 54 + X2_Mouse1))	and (vc >= 80 + Y2_Mouse2 and vc <= 90 + Y2_Mouse2)) or
 			(((hc >= 18 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 42 + X2_Mouse1	and hc <= 48 + X2_Mouse1))	and (vc >= 90 + Y2_Mouse2 and vc <= 100 + Y2_Mouse2))	or
 			 ((hc >= 30 + X2_Mouse1 and hc <= 36 + X2_Mouse1) and (vc >= 100 + Y2_Mouse2 and vc <= 110 + Y2_Mouse2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_12 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_12 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1004,7 +1005,7 @@ begin
 			(((hc >= 12 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 30 + X2_Mouse2	and hc <= 36 + X2_Mouse2)	or  (hc >= 42 + X2_Mouse2 and hc <= 54 + X2_Mouse2))	and (vc >= 80 + Y2_Mouse2 and vc <= 90 + Y2_Mouse2)) or
 			(((hc >= 18 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 42 + X2_Mouse2	and hc <= 48 + X2_Mouse2))	and (vc >= 90 + Y2_Mouse2 and vc <= 100 + Y2_Mouse2))	or
 			 ((hc >= 30 + X2_Mouse2 and hc <= 36 + X2_Mouse2) and (vc >= 100 + Y2_Mouse2 and vc <= 110 + Y2_Mouse2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_22 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_22 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1020,7 +1021,7 @@ begin
 			(((hc >= 12 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 30 + X2_Mouse3	and hc <= 36 + X2_Mouse3)	or  (hc >= 42 + X2_Mouse3 and hc <= 54 + X2_Mouse3))	and (vc >= 80 + Y2_Mouse2 and vc <= 90 + Y2_Mouse2)) or
 			(((hc >= 18 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 42 + X2_Mouse3	and hc <= 48 + X2_Mouse3))	and (vc >= 90 + Y2_Mouse2 and vc <= 100 + Y2_Mouse2))	or
 			 ((hc >= 30 + X2_Mouse3 and hc <= 36 + X2_Mouse3) and (vc >= 100 + Y2_Mouse2 and vc <= 110 + Y2_Mouse2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_32 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_32 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111"; 
@@ -1036,7 +1037,7 @@ begin
 			(((hc >= 12 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 30 + X2_Mouse4	and hc <= 36 + X2_Mouse4)	or  (hc >= 42 + X2_Mouse4 and hc <= 54 + X2_Mouse4))	and (vc >= 80 + Y2_Mouse2 and vc <= 90 + Y2_Mouse2)) or
 			(((hc >= 18 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 42 + X2_Mouse4	and hc <= 48 + X2_Mouse4))	and (vc >= 90 + Y2_Mouse2 and vc <= 100 + Y2_Mouse2))	or
 			 ((hc >= 30 + X2_Mouse4 and hc <= 36 + X2_Mouse4) and (vc >= 100 + Y2_Mouse2 and vc <= 110 + Y2_Mouse2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_42 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_42 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1052,7 +1053,7 @@ begin
 			(((hc >= 12 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 30 + X2_Mouse5	and hc <= 36 + X2_Mouse5)	or  (hc >= 42 + X2_Mouse5 and hc <= 54 + X2_Mouse5))	and (vc >= 80 + Y2_Mouse2 and vc <= 90 + Y2_Mouse2)) or
 			(((hc >= 18 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 42 + X2_Mouse5	and hc <= 48 + X2_Mouse5))	and (vc >= 90 + Y2_Mouse2 and vc <= 100 + Y2_Mouse2))	or
 			 ((hc >= 30 + X2_Mouse5 and hc <= 36 + X2_Mouse5) and (vc >= 100 + Y2_Mouse2 and vc <= 110 + Y2_Mouse2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_52 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_52 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1068,7 +1069,7 @@ begin
 			(((hc >= 12 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 30 + X2_Mouse1	and hc <= 36 + X2_Mouse1)	or  (hc >= 42 + X2_Mouse1 and hc <= 54 + X2_Mouse1))	and (vc >= 80 + Y2_Mouse3 and vc <= 90 + Y2_Mouse3)) or
 			(((hc >= 18 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 42 + X2_Mouse1	and hc <= 48 + X2_Mouse1))	and (vc >= 90 + Y2_Mouse3 and vc <= 100 + Y2_Mouse3))	or
 			 ((hc >= 30 + X2_Mouse1 and hc <= 36 + X2_Mouse1) and (vc >= 100 + Y2_Mouse3 and vc <= 110 + Y2_Mouse3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_13 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_13 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1084,7 +1085,7 @@ begin
 			(((hc >= 12 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 30 + X2_Mouse2	and hc <= 36 + X2_Mouse2)	or  (hc >= 42 + X2_Mouse2 and hc <= 54 + X2_Mouse2))	and (vc >= 80 + Y2_Mouse3 and vc <= 90 + Y2_Mouse3)) or
 			(((hc >= 18 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 42 + X2_Mouse2	and hc <= 48 + X2_Mouse2))	and (vc >= 90 + Y2_Mouse3 and vc <= 100 + Y2_Mouse3))	or
 			 ((hc >= 30 + X2_Mouse2 and hc <= 36 + X2_Mouse2) and (vc >= 100 + Y2_Mouse3 and vc <= 110 + Y2_Mouse3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_23 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_23 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1100,7 +1101,7 @@ begin
 			(((hc >= 12 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 30 + X2_Mouse3	and hc <= 36 + X2_Mouse3)	or  (hc >= 42 + X2_Mouse3 and hc <= 54 + X2_Mouse3))	and (vc >= 80 + Y2_Mouse3 and vc <= 90 + Y2_Mouse3)) or
 			(((hc >= 18 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 42 + X2_Mouse3	and hc <= 48 + X2_Mouse3))	and (vc >= 90 + Y2_Mouse3 and vc <= 100 + Y2_Mouse3))	or
 			 ((hc >= 30 + X2_Mouse3 and hc <= 36 + X2_Mouse3) and (vc >= 100 + Y2_Mouse3 and vc <= 110 + Y2_Mouse3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_33 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_33 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111"; 
@@ -1116,7 +1117,7 @@ begin
 			(((hc >= 12 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 30 + X2_Mouse4	and hc <= 36 + X2_Mouse4)	or  (hc >= 42 + X2_Mouse4 and hc <= 54 + X2_Mouse4))	and (vc >= 80 + Y2_Mouse3 and vc <= 90 + Y2_Mouse3)) or
 			(((hc >= 18 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 42 + X2_Mouse4	and hc <= 48 + X2_Mouse4))	and (vc >= 90 + Y2_Mouse3 and vc <= 100 + Y2_Mouse3))	or
 			 ((hc >= 30 + X2_Mouse4 and hc <= 36 + X2_Mouse4) and (vc >= 100 + Y2_Mouse3 and vc <= 110 + Y2_Mouse3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_43 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_43 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1132,7 +1133,7 @@ begin
 			(((hc >= 12 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 30 + X2_Mouse5	and hc <= 36 + X2_Mouse5)	or  (hc >= 42 + X2_Mouse5 and hc <= 54 + X2_Mouse5))	and (vc >= 80 + Y2_Mouse3 and vc <= 90 + Y2_Mouse3)) or
 			(((hc >= 18 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 42 + X2_Mouse5	and hc <= 48 + X2_Mouse5))	and (vc >= 90 + Y2_Mouse3 and vc <= 100 + Y2_Mouse3))	or
 			 ((hc >= 30 + X2_Mouse5 and hc <= 36 + X2_Mouse5) and (vc >= 100 + Y2_Mouse3 and vc <= 110 + Y2_Mouse3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_53 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_53 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1148,7 +1149,7 @@ begin
 			(((hc >= 12 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 30 + X2_Mouse1	and hc <= 36 + X2_Mouse1)	or  (hc >= 42 + X2_Mouse1 and hc <= 54 + X2_Mouse1))	and (vc >= 80 + Y2_Mouse4 and vc <= 90 + Y2_Mouse4)) or
 			(((hc >= 18 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 42 + X2_Mouse1	and hc <= 48 + X2_Mouse1))	and (vc >= 90 + Y2_Mouse4 and vc <= 100 + Y2_Mouse4))	or
 			 ((hc >= 30 + X2_Mouse1 and hc <= 36 + X2_Mouse1) and (vc >= 100 + Y2_Mouse4 and vc <= 110 + Y2_Mouse4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_14 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_14 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1164,7 +1165,7 @@ begin
 			(((hc >= 12 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 30 + X2_Mouse2	and hc <= 36 + X2_Mouse2)	or  (hc >= 42 + X2_Mouse2 and hc <= 54 + X2_Mouse2))	and (vc >= 80 + Y2_Mouse4 and vc <= 90 + Y2_Mouse4)) or
 			(((hc >= 18 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 42 + X2_Mouse2	and hc <= 48 + X2_Mouse2))	and (vc >= 90 + Y2_Mouse4 and vc <= 100 + Y2_Mouse4))	or
 			 ((hc >= 30 + X2_Mouse2 and hc <= 36 + X2_Mouse2) and (vc >= 100 + Y2_Mouse4 and vc <= 110 + Y2_Mouse4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_24 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_24 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1180,7 +1181,7 @@ begin
 			(((hc >= 12 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 30 + X2_Mouse3	and hc <= 36 + X2_Mouse3)	or  (hc >= 42 + X2_Mouse3 and hc <= 54 + X2_Mouse3))	and (vc >= 80 + Y2_Mouse4 and vc <= 90 + Y2_Mouse4)) or
 			(((hc >= 18 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 42 + X2_Mouse3	and hc <= 48 + X2_Mouse3))	and (vc >= 90 + Y2_Mouse4 and vc <= 100 + Y2_Mouse4))	or
 			 ((hc >= 30 + X2_Mouse3 and hc <= 36 + X2_Mouse3) and (vc >= 100 + Y2_Mouse4 and vc <= 110 + Y2_Mouse4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_34 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_34 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111"; 
@@ -1196,7 +1197,7 @@ begin
 			(((hc >= 12 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 30 + X2_Mouse4	and hc <= 36 + X2_Mouse4)	or  (hc >= 42 + X2_Mouse4 and hc <= 54 + X2_Mouse4))	and (vc >= 80 + Y2_Mouse4 and vc <= 90 + Y2_Mouse4)) or
 			(((hc >= 18 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 42 + X2_Mouse4	and hc <= 48 + X2_Mouse4))	and (vc >= 90 + Y2_Mouse4 and vc <= 100 + Y2_Mouse4))	or
 			 ((hc >= 30 + X2_Mouse4 and hc <= 36 + X2_Mouse4) and (vc >= 100 + Y2_Mouse4 and vc <= 110 + Y2_Mouse4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_44 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_44 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1212,7 +1213,7 @@ begin
 			(((hc >= 12 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 30 + X2_Mouse5	and hc <= 36 + X2_Mouse5)	or  (hc >= 42 + X2_Mouse5 and hc <= 54 + X2_Mouse5))	and (vc >= 80 + Y2_Mouse4 and vc <= 90 + Y2_Mouse4)) or
 			(((hc >= 18 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 42 + X2_Mouse5	and hc <= 48 + X2_Mouse5))	and (vc >= 90 + Y2_Mouse4 and vc <= 100 + Y2_Mouse4))	or
 			 ((hc >= 30 + X2_Mouse5 and hc <= 36 + X2_Mouse5) and (vc >= 100 + Y2_Mouse4 and vc <= 110 + Y2_Mouse4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_54 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_54 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1228,7 +1229,7 @@ begin
 			(((hc >= 12 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 30 + X2_Mouse1	and hc <= 36 + X2_Mouse1)	or  (hc >= 42 + X2_Mouse1 and hc <= 54 + X2_Mouse1))	and (vc >= 80 + Y2_Mouse5 and vc <= 90 + Y2_Mouse5)) or
 			(((hc >= 18 + X2_Mouse1 and hc <= 24 + X2_Mouse1) or  (hc >= 42 + X2_Mouse1	and hc <= 48 + X2_Mouse1))	and (vc >= 90 + Y2_Mouse5 and vc <= 100 + Y2_Mouse5))	or
 			 ((hc >= 30 + X2_Mouse1 and hc <= 36 + X2_Mouse1) and (vc >= 100 + Y2_Mouse5 and vc <= 110 + Y2_Mouse5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_15 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_15 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1244,7 +1245,7 @@ begin
 			(((hc >= 12 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 30 + X2_Mouse2	and hc <= 36 + X2_Mouse2)	or  (hc >= 42 + X2_Mouse2 and hc <= 54 + X2_Mouse2))	and (vc >= 80 + Y2_Mouse5 and vc <= 90 + Y2_Mouse5)) or
 			(((hc >= 18 + X2_Mouse2 and hc <= 24 + X2_Mouse2) or  (hc >= 42 + X2_Mouse2	and hc <= 48 + X2_Mouse2))	and (vc >= 90 + Y2_Mouse5 and vc <= 100 + Y2_Mouse5))	or
 			 ((hc >= 30 + X2_Mouse2 and hc <= 36 + X2_Mouse2) and (vc >= 100 + Y2_Mouse5 and vc <= 110 + Y2_Mouse5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_25 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_25 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1260,7 +1261,7 @@ begin
 			(((hc >= 12 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 30 + X2_Mouse3	and hc <= 36 + X2_Mouse3)	or  (hc >= 42 + X2_Mouse3 and hc <= 54 + X2_Mouse3))	and (vc >= 80 + Y2_Mouse5 and vc <= 90 + Y2_Mouse5)) or
 			(((hc >= 18 + X2_Mouse3 and hc <= 24 + X2_Mouse3) or  (hc >= 42 + X2_Mouse3	and hc <= 48 + X2_Mouse3))	and (vc >= 90 + Y2_Mouse5 and vc <= 100 + Y2_Mouse5))	or
 			 ((hc >= 30 + X2_Mouse3 and hc <= 36 + X2_Mouse3) and (vc >= 100 + Y2_Mouse5 and vc <= 110 + Y2_Mouse5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_35 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_35 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111"; 
@@ -1276,7 +1277,7 @@ begin
 			(((hc >= 12 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 30 + X2_Mouse4	and hc <= 36 + X2_Mouse4)	or  (hc >= 42 + X2_Mouse4 and hc <= 54 + X2_Mouse4))	and (vc >= 80 + Y2_Mouse5 and vc <= 90 + Y2_Mouse5)) or
 			(((hc >= 18 + X2_Mouse4 and hc <= 24 + X2_Mouse4) or  (hc >= 42 + X2_Mouse4	and hc <= 48 + X2_Mouse4))	and (vc >= 90 + Y2_Mouse5 and vc <= 100 + Y2_Mouse5))	or
 			 ((hc >= 30 + X2_Mouse4 and hc <= 36 + X2_Mouse4) and (vc >= 100 + Y2_Mouse5 and vc <= 110 + Y2_Mouse5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_45 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_45 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111";
@@ -1292,7 +1293,7 @@ begin
 			(((hc >= 12 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 30 + X2_Mouse5	and hc <= 36 + X2_Mouse5)	or  (hc >= 42 + X2_Mouse5 and hc <= 54 + X2_Mouse5))	and (vc >= 80 + Y2_Mouse5 and vc <= 90 + Y2_Mouse5)) or
 			(((hc >= 18 + X2_Mouse5 and hc <= 24 + X2_Mouse5) or  (hc >= 42 + X2_Mouse5	and hc <= 48 + X2_Mouse5))	and (vc >= 90 + Y2_Mouse5 and vc <= 100 + Y2_Mouse5))	or
 			 ((hc >= 30 + X2_Mouse5 and hc <= 36 + X2_Mouse5) and (vc >= 100 + Y2_Mouse5 and vc <= 110 + Y2_Mouse5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_55 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M1_55 = 1 and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111"; 
@@ -1307,7 +1308,7 @@ begin
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >= 21 + X2_Cat1 and hc <  27 + X2_Cat1)	or	(hc >= 33 + X2_Cat1 and hc <  39 + X2_Cat1)	 or	 (hc >= 45 + X2_Cat1 and hc <  51 + X2_Cat1)	or	(hc > 57 + X2_Cat1 and hc < 63 + X2_Cat1))	and (vc >= 70 + Y2_Cat1 and vc <= 80 + Y2_Cat1)) or
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >  57 + X2_Cat1 and hc <  63 + X2_Cat1))  and (vc >  80 + Y2_Cat1 and vc <  90 + Y2_Cat1)) or
 			(((hc >= 15 + X2_Cat1 and hc <= 21 + X2_Cat1) or  (hc >= 51 + X2_Cat1 and hc <= 57 + X2_Cat1)) 	and (vc >= 90 + Y2_Cat1 and vc < 100 + Y2_Cat1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_11 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_11 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1322,7 +1323,7 @@ begin
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >= 21 + X2_Cat2 and hc <  27 + X2_Cat2)	or	(hc >= 33 + X2_Cat2 and hc <  39 + X2_Cat2)	 or	 (hc >= 45 + X2_Cat2 and hc <  51 + X2_Cat2)	or	(hc > 57 + X2_Cat2 and hc < 63 + X2_Cat2))	and (vc >= 70 + Y2_Cat1 and vc <= 80 + Y2_Cat1)) or
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >  57 + X2_Cat2 and hc <  63 + X2_Cat2))  and (vc >  80 + Y2_Cat1 and vc <  90 + Y2_Cat1)) or
 			(((hc >= 15 + X2_Cat2 and hc <= 21 + X2_Cat2) or  (hc >= 51 + X2_Cat2 and hc <= 57 + X2_Cat2)) 	and (vc >= 90 + Y2_Cat1 and vc < 100 + Y2_Cat1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_21 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_21 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1337,7 +1338,7 @@ begin
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >= 21 + X2_Cat3 and hc <  27 + X2_Cat3)	or	(hc >= 33 + X2_Cat3 and hc <  39 + X2_Cat3)	 or	 (hc >= 45 + X2_Cat3 and hc <  51 + X2_Cat3)	or	(hc > 57 + X2_Cat3 and hc < 63 + X2_Cat3))	and (vc >= 70 + Y2_Cat1 and vc <= 80 + Y2_Cat1)) or
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >  57 + X2_Cat3 and hc <  63 + X2_Cat3))  and (vc >  80 + Y2_Cat1 and vc <  90 + Y2_Cat1)) or
 			(((hc >= 15 + X2_Cat3 and hc <= 21 + X2_Cat3) or  (hc >= 51 + X2_Cat3 and hc <= 57 + X2_Cat3)) 	and (vc >= 90 + Y2_Cat1 and vc < 100 + Y2_Cat1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_31 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_31 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1352,7 +1353,7 @@ begin
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >= 21 + X2_Cat4 and hc <  27 + X2_Cat4)	or	(hc >= 33 + X2_Cat4 and hc <  39 + X2_Cat4)	 or	 (hc >= 45 + X2_Cat4 and hc <  51 + X2_Cat4)	or	(hc > 57 + X2_Cat4 and hc < 63 + X2_Cat4))	and (vc >= 70 + Y2_Cat1 and vc <= 80 + Y2_Cat1)) or
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >  57 + X2_Cat4 and hc <  63 + X2_Cat4))  and (vc >  80 + Y2_Cat1 and vc <  90 + Y2_Cat1)) or
 			(((hc >= 15 + X2_Cat4 and hc <= 21 + X2_Cat4) or  (hc >= 51 + X2_Cat4 and hc <= 57 + X2_Cat4)) 	and (vc >= 90 + Y2_Cat1 and vc < 100 + Y2_Cat1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_41 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_41 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1367,7 +1368,7 @@ begin
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >= 21 + X2_Cat5 and hc <  27 + X2_Cat5)	or	(hc >= 33 + X2_Cat5 and hc <  39 + X2_Cat5)	 or	 (hc >= 45 + X2_Cat5 and hc <  51 + X2_Cat5)	or	(hc > 57 + X2_Cat5 and hc < 63 + X2_Cat5))	and (vc >= 70 + Y2_Cat1 and vc <= 80 + Y2_Cat1)) or
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >  57 + X2_Cat5 and hc <  63 + X2_Cat5))  and (vc >  80 + Y2_Cat1 and vc <  90 + Y2_Cat1)) or
 			(((hc >= 15 + X2_Cat5 and hc <= 21 + X2_Cat5) or  (hc >= 51 + X2_Cat5 and hc <= 57 + X2_Cat5)) 	and (vc >= 90 + Y2_Cat1 and vc < 100 + Y2_Cat1)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_51 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_51 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1382,7 +1383,7 @@ begin
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >= 21 + X2_Cat1 and hc <  27 + X2_Cat1)	or	(hc >= 33 + X2_Cat1 and hc <  39 + X2_Cat1)	 or	 (hc >= 45 + X2_Cat1 and hc <  51 + X2_Cat1)	or	(hc > 57 + X2_Cat1 and hc < 63 + X2_Cat1))	and (vc >= 70 + Y2_Cat2 and vc <= 80 + Y2_Cat2)) or
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >  57 + X2_Cat1 and hc <  63 + X2_Cat1))  and (vc >  80 + Y2_Cat2 and vc <  90 + Y2_Cat2)) or
 			(((hc >= 15 + X2_Cat1 and hc <= 21 + X2_Cat1) or  (hc >= 51 + X2_Cat1 and hc <= 57 + X2_Cat1)) 	and (vc >= 90 + Y2_Cat2 and vc < 100 + Y2_Cat2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_12 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_12 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1397,7 +1398,7 @@ begin
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >= 21 + X2_Cat2 and hc <  27 + X2_Cat2)	or	(hc >= 33 + X2_Cat2 and hc <  39 + X2_Cat2)	 or	 (hc >= 45 + X2_Cat2 and hc <  51 + X2_Cat2)	or	(hc > 57 + X2_Cat2 and hc < 63 + X2_Cat2))	and (vc >= 70 + Y2_Cat2 and vc <= 80 + Y2_Cat2)) or
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >  57 + X2_Cat2 and hc <  63 + X2_Cat2))  and (vc >  80 + Y2_Cat2 and vc <  90 + Y2_Cat2)) or
 			(((hc >= 15 + X2_Cat2 and hc <= 21 + X2_Cat2) or  (hc >= 51 + X2_Cat2 and hc <= 57 + X2_Cat2)) 	and (vc >= 90 + Y2_Cat2 and vc < 100 + Y2_Cat2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_22 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_22 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1412,7 +1413,7 @@ begin
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >= 21 + X2_Cat3 and hc <  27 + X2_Cat3)	or	(hc >= 33 + X2_Cat3 and hc <  39 + X2_Cat3)	 or	 (hc >= 45 + X2_Cat3 and hc <  51 + X2_Cat3)	or	(hc > 57 + X2_Cat3 and hc < 63 + X2_Cat3))	and (vc >= 70 + Y2_Cat2 and vc <= 80 + Y2_Cat2)) or
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >  57 + X2_Cat3 and hc <  63 + X2_Cat3))  and (vc >  80 + Y2_Cat2 and vc <  90 + Y2_Cat2)) or
 			(((hc >= 15 + X2_Cat3 and hc <= 21 + X2_Cat3) or  (hc >= 51 + X2_Cat3 and hc <= 57 + X2_Cat3)) 	and (vc >= 90 + Y2_Cat2 and vc < 100 + Y2_Cat2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_32 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_32 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1427,7 +1428,7 @@ begin
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >= 21 + X2_Cat4 and hc <  27 + X2_Cat4)	or	(hc >= 33 + X2_Cat4 and hc <  39 + X2_Cat4)	 or	 (hc >= 45 + X2_Cat4 and hc <  51 + X2_Cat4)	or	(hc > 57 + X2_Cat4 and hc < 63 + X2_Cat4))	and (vc >= 70 + Y2_Cat2 and vc <= 80 + Y2_Cat2)) or
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >  57 + X2_Cat4 and hc <  63 + X2_Cat4))  and (vc >  80 + Y2_Cat2 and vc <  90 + Y2_Cat2)) or
 			(((hc >= 15 + X2_Cat4 and hc <= 21 + X2_Cat4) or  (hc >= 51 + X2_Cat4 and hc <= 57 + X2_Cat4)) 	and (vc >= 90 + Y2_Cat2 and vc < 100 + Y2_Cat2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_42 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_42 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1442,7 +1443,7 @@ begin
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >= 21 + X2_Cat5 and hc <  27 + X2_Cat5)	or	(hc >= 33 + X2_Cat5 and hc <  39 + X2_Cat5)	 or	 (hc >= 45 + X2_Cat5 and hc <  51 + X2_Cat5)	or	(hc > 57 + X2_Cat5 and hc < 63 + X2_Cat5))	and (vc >= 70 + Y2_Cat2 and vc <= 80 + Y2_Cat2)) or
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >  57 + X2_Cat5 and hc <  63 + X2_Cat5))  and (vc >  80 + Y2_Cat2 and vc <  90 + Y2_Cat2)) or
 			(((hc >= 15 + X2_Cat5 and hc <= 21 + X2_Cat5) or  (hc >= 51 + X2_Cat5 and hc <= 57 + X2_Cat5)) 	and (vc >= 90 + Y2_Cat2 and vc < 100 + Y2_Cat2)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_52 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_52 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110"; 
@@ -1457,7 +1458,7 @@ begin
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >= 21 + X2_Cat1 and hc <  27 + X2_Cat1)	or	(hc >= 33 + X2_Cat1 and hc <  39 + X2_Cat1)	 or	 (hc >= 45 + X2_Cat1 and hc <  51 + X2_Cat1)	or	(hc > 57 + X2_Cat1 and hc < 63 + X2_Cat1))	and (vc >= 70 + Y2_Cat3 and vc <= 80 + Y2_Cat3)) or
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >  57 + X2_Cat1 and hc <  63 + X2_Cat1))  and (vc >  80 + Y2_Cat3 and vc <  90 + Y2_Cat3)) or
 			(((hc >= 15 + X2_Cat1 and hc <= 21 + X2_Cat1) or  (hc >= 51 + X2_Cat1 and hc <= 57 + X2_Cat1)) 	and (vc >= 90 + Y2_Cat3 and vc < 100 + Y2_Cat3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_13 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_13 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1472,7 +1473,7 @@ begin
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >= 21 + X2_Cat2 and hc <  27 + X2_Cat2)	or	(hc >= 33 + X2_Cat2 and hc <  39 + X2_Cat2)	 or	 (hc >= 45 + X2_Cat2 and hc <  51 + X2_Cat2)	or	(hc > 57 + X2_Cat2 and hc < 63 + X2_Cat2))	and (vc >= 70 + Y2_Cat3 and vc <= 80 + Y2_Cat3)) or
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >  57 + X2_Cat2 and hc <  63 + X2_Cat2))  and (vc >  80 + Y2_Cat3 and vc <  90 + Y2_Cat3)) or
 			(((hc >= 15 + X2_Cat2 and hc <= 21 + X2_Cat2) or  (hc >= 51 + X2_Cat2 and hc <= 57 + X2_Cat2)) 	and (vc >= 90 + Y2_Cat3 and vc < 100 + Y2_Cat3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_23 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_23 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1487,7 +1488,7 @@ begin
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >= 21 + X2_Cat3 and hc <  27 + X2_Cat3)	or	(hc >= 33 + X2_Cat3 and hc <  39 + X2_Cat3)	 or	 (hc >= 45 + X2_Cat3 and hc <  51 + X2_Cat3)	or	(hc > 57 + X2_Cat3 and hc < 63 + X2_Cat3))	and (vc >= 70 + Y2_Cat3 and vc <= 80 + Y2_Cat3)) or
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >  57 + X2_Cat3 and hc <  63 + X2_Cat3))  and (vc >  80 + Y2_Cat3 and vc <  90 + Y2_Cat3)) or
 			(((hc >= 15 + X2_Cat3 and hc <= 21 + X2_Cat3) or  (hc >= 51 + X2_Cat3 and hc <= 57 + X2_Cat3)) 	and (vc >= 90 + Y2_Cat3 and vc < 100 + Y2_Cat3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_33 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_33 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1502,7 +1503,7 @@ begin
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >= 21 + X2_Cat4 and hc <  27 + X2_Cat4)	or	(hc >= 33 + X2_Cat4 and hc <  39 + X2_Cat4)	 or	 (hc >= 45 + X2_Cat4 and hc <  51 + X2_Cat4)	or	(hc > 57 + X2_Cat4 and hc < 63 + X2_Cat4))	and (vc >= 70 + Y2_Cat3 and vc <= 80 + Y2_Cat3)) or
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >  57 + X2_Cat4 and hc <  63 + X2_Cat4))  and (vc >  80 + Y2_Cat3 and vc <  90 + Y2_Cat3)) or
 			(((hc >= 15 + X2_Cat4 and hc <= 21 + X2_Cat4) or  (hc >= 51 + X2_Cat4 and hc <= 57 + X2_Cat4)) 	and (vc >= 90 + Y2_Cat3 and vc < 100 + Y2_Cat3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_43 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_43 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1517,7 +1518,7 @@ begin
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >= 21 + X2_Cat5 and hc <  27 + X2_Cat5)	or	(hc >= 33 + X2_Cat5 and hc <  39 + X2_Cat5)	 or	 (hc >= 45 + X2_Cat5 and hc <  51 + X2_Cat5)	or	(hc > 57 + X2_Cat5 and hc < 63 + X2_Cat5))	and (vc >= 70 + Y2_Cat3 and vc <= 80 + Y2_Cat3)) or
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >  57 + X2_Cat5 and hc <  63 + X2_Cat5))  and (vc >  80 + Y2_Cat3 and vc <  90 + Y2_Cat3)) or
 			(((hc >= 15 + X2_Cat5 and hc <= 21 + X2_Cat5) or  (hc >= 51 + X2_Cat5 and hc <= 57 + X2_Cat5)) 	and (vc >= 90 + Y2_Cat3 and vc < 100 + Y2_Cat3)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_53 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_53 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1532,7 +1533,7 @@ begin
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >= 21 + X2_Cat1 and hc <  27 + X2_Cat1)	or	(hc >= 33 + X2_Cat1 and hc <  39 + X2_Cat1)	 or	 (hc >= 45 + X2_Cat1 and hc <  51 + X2_Cat1)	or	(hc > 57 + X2_Cat1 and hc < 63 + X2_Cat1))	and (vc >= 70 + Y2_Cat4 and vc <= 80 + Y2_Cat4)) or
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >  57 + X2_Cat1 and hc <  63 + X2_Cat1))  and (vc >  80 + Y2_Cat4 and vc <  90 + Y2_Cat4)) or
 			(((hc >= 15 + X2_Cat1 and hc <= 21 + X2_Cat1) or  (hc >= 51 + X2_Cat1 and hc <= 57 + X2_Cat1)) 	and (vc >= 90 + Y2_Cat4 and vc < 100 + Y2_Cat4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_14 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_14 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1547,7 +1548,7 @@ begin
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >= 21 + X2_Cat2 and hc <  27 + X2_Cat2)	or	(hc >= 33 + X2_Cat2 and hc <  39 + X2_Cat2)	 or	 (hc >= 45 + X2_Cat2 and hc <  51 + X2_Cat2)	or	(hc > 57 + X2_Cat2 and hc < 63 + X2_Cat2))	and (vc >= 70 + Y2_Cat4 and vc <= 80 + Y2_Cat4)) or
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >  57 + X2_Cat2 and hc <  63 + X2_Cat2))  and (vc >  80 + Y2_Cat4 and vc <  90 + Y2_Cat4)) or
 			(((hc >= 15 + X2_Cat2 and hc <= 21 + X2_Cat2) or  (hc >= 51 + X2_Cat2 and hc <= 57 + X2_Cat2)) 	and (vc >= 90 + Y2_Cat4 and vc < 100 + Y2_Cat4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_24 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_24 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1562,7 +1563,7 @@ begin
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >= 21 + X2_Cat3 and hc <  27 + X2_Cat3)	or	(hc >= 33 + X2_Cat3 and hc <  39 + X2_Cat3)	 or	 (hc >= 45 + X2_Cat3 and hc <  51 + X2_Cat3)	or	(hc > 57 + X2_Cat3 and hc < 63 + X2_Cat3))	and (vc >= 70 + Y2_Cat4 and vc <= 80 + Y2_Cat4)) or
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >  57 + X2_Cat3 and hc <  63 + X2_Cat3))  and (vc >  80 + Y2_Cat4 and vc <  90 + Y2_Cat4)) or
 			(((hc >= 15 + X2_Cat3 and hc <= 21 + X2_Cat3) or  (hc >= 51 + X2_Cat3 and hc <= 57 + X2_Cat3)) 	and (vc >= 90 + Y2_Cat4 and vc < 100 + Y2_Cat4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_34 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_34 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1577,7 +1578,7 @@ begin
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >= 21 + X2_Cat4 and hc <  27 + X2_Cat4)	or	(hc >= 33 + X2_Cat4 and hc <  39 + X2_Cat4)	 or	 (hc >= 45 + X2_Cat4 and hc <  51 + X2_Cat4)	or	(hc > 57 + X2_Cat4 and hc < 63 + X2_Cat4))	and (vc >= 70 + Y2_Cat4 and vc <= 80 + Y2_Cat4)) or
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >  57 + X2_Cat4 and hc <  63 + X2_Cat4))  and (vc >  80 + Y2_Cat4 and vc <  90 + Y2_Cat4)) or
 			(((hc >= 15 + X2_Cat4 and hc <= 21 + X2_Cat4) or  (hc >= 51 + X2_Cat4 and hc <= 57 + X2_Cat4)) 	and (vc >= 90 + Y2_Cat4 and vc < 100 + Y2_Cat4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_44 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_44 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1592,7 +1593,7 @@ begin
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >= 21 + X2_Cat5 and hc <  27 + X2_Cat5)	or	(hc >= 33 + X2_Cat5 and hc <  39 + X2_Cat5)	 or	 (hc >= 45 + X2_Cat5 and hc <  51 + X2_Cat5)	or	(hc > 57 + X2_Cat5 and hc < 63 + X2_Cat5))	and (vc >= 70 + Y2_Cat4 and vc <= 80 + Y2_Cat4)) or
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >  57 + X2_Cat5 and hc <  63 + X2_Cat5))  and (vc >  80 + Y2_Cat4 and vc <  90 + Y2_Cat4)) or
 			(((hc >= 15 + X2_Cat5 and hc <= 21 + X2_Cat5) or  (hc >= 51 + X2_Cat5 and hc <= 57 + X2_Cat5)) 	and (vc >= 90 + Y2_Cat4 and vc < 100 + Y2_Cat4)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_54 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_54 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1607,7 +1608,7 @@ begin
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >= 21 + X2_Cat1 and hc <  27 + X2_Cat1)	or	(hc >= 33 + X2_Cat1 and hc <  39 + X2_Cat1)	 or	 (hc >= 45 + X2_Cat1 and hc <  51 + X2_Cat1)	or	(hc > 57 + X2_Cat1 and hc < 63 + X2_Cat1))	and (vc >= 70 + Y2_Cat5 and vc <= 80 + Y2_Cat5)) or
 			(((hc >  9  + X2_Cat1 and hc <  15 + X2_Cat1) or  (hc >  57 + X2_Cat1 and hc <  63 + X2_Cat1))  and (vc >  80 + Y2_Cat5 and vc <  90 + Y2_Cat5)) or
 			(((hc >= 15 + X2_Cat1 and hc <= 21 + X2_Cat1) or  (hc >= 51 + X2_Cat1 and hc <= 57 + X2_Cat1)) 	and (vc >= 90 + Y2_Cat5 and vc < 100 + Y2_Cat5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_15 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_15 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1622,7 +1623,7 @@ begin
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >= 21 + X2_Cat2 and hc <  27 + X2_Cat2)	or	(hc >= 33 + X2_Cat2 and hc <  39 + X2_Cat2)	 or	 (hc >= 45 + X2_Cat2 and hc <  51 + X2_Cat2)	or	(hc > 57 + X2_Cat2 and hc < 63 + X2_Cat2))	and (vc >= 70 + Y2_Cat5 and vc <= 80 + Y2_Cat5)) or
 			(((hc >  9  + X2_Cat2 and hc <  15 + X2_Cat2) or  (hc >  57 + X2_Cat2 and hc <  63 + X2_Cat2))  and (vc >  80 + Y2_Cat5 and vc <  90 + Y2_Cat5)) or
 			(((hc >= 15 + X2_Cat2 and hc <= 21 + X2_Cat2) or  (hc >= 51 + X2_Cat2 and hc <= 57 + X2_Cat2)) 	and (vc >= 90 + Y2_Cat5 and vc < 100 + Y2_Cat5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_25 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_25 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1637,7 +1638,7 @@ begin
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >= 21 + X2_Cat3 and hc <  27 + X2_Cat3)	or	(hc >= 33 + X2_Cat3 and hc <  39 + X2_Cat3)	 or	 (hc >= 45 + X2_Cat3 and hc <  51 + X2_Cat3)	or	(hc > 57 + X2_Cat3 and hc < 63 + X2_Cat3))	and (vc >= 70 + Y2_Cat5 and vc <= 80 + Y2_Cat5)) or
 			(((hc >  9  + X2_Cat3 and hc <  15 + X2_Cat3) or  (hc >  57 + X2_Cat3 and hc <  63 + X2_Cat3))  and (vc >  80 + Y2_Cat5 and vc <  90 + Y2_Cat5)) or
 			(((hc >= 15 + X2_Cat3 and hc <= 21 + X2_Cat3) or  (hc >= 51 + X2_Cat3 and hc <= 57 + X2_Cat3)) 	and (vc >= 90 + Y2_Cat5 and vc < 100 + Y2_Cat5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_35 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_35 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1652,7 +1653,7 @@ begin
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >= 21 + X2_Cat4 and hc <  27 + X2_Cat4)	or	(hc >= 33 + X2_Cat4 and hc <  39 + X2_Cat4)	 or	 (hc >= 45 + X2_Cat4 and hc <  51 + X2_Cat4)	or	(hc > 57 + X2_Cat4 and hc < 63 + X2_Cat4))	and (vc >= 70 + Y2_Cat5 and vc <= 80 + Y2_Cat5)) or
 			(((hc >  9  + X2_Cat4 and hc <  15 + X2_Cat4) or  (hc >  57 + X2_Cat4 and hc <  63 + X2_Cat4))  and (vc >  80 + Y2_Cat5 and vc <  90 + Y2_Cat5)) or
 			(((hc >= 15 + X2_Cat4 and hc <= 21 + X2_Cat4) or  (hc >= 51 + X2_Cat4 and hc <= 57 + X2_Cat4)) 	and (vc >= 90 + Y2_Cat5 and vc < 100 + Y2_Cat5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_45 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_45 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1667,7 +1668,7 @@ begin
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >= 21 + X2_Cat5 and hc <  27 + X2_Cat5)	or	(hc >= 33 + X2_Cat5 and hc <  39 + X2_Cat5)	 or	 (hc >= 45 + X2_Cat5 and hc <  51 + X2_Cat5)	or	(hc > 57 + X2_Cat5 and hc < 63 + X2_Cat5))	and (vc >= 70 + Y2_Cat5 and vc <= 80 + Y2_Cat5)) or
 			(((hc >  9  + X2_Cat5 and hc <  15 + X2_Cat5) or  (hc >  57 + X2_Cat5 and hc <  63 + X2_Cat5))  and (vc >  80 + Y2_Cat5 and vc <  90 + Y2_Cat5)) or
 			(((hc >= 15 + X2_Cat5 and hc <= 21 + X2_Cat5) or  (hc >= 51 + X2_Cat5 and hc <= 57 + X2_Cat5)) 	and (vc >= 90 + Y2_Cat5 and vc < 100 + Y2_Cat5)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_55 = 1 and Winner = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and M2_55 = 1 and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -1711,7 +1712,7 @@ begin
 			and videoON = '1' and Winner3 > 0 and Winner3 <= 1 and juego9 = '1' and juego25 = '0') then
 			red <= "1111";
 			blue <= "0000";
-			green <= "1111"; 
+			green <= "1111";
 			
 		-- Winner Player 2 3x3		
 		elsif(((((hc >= X_Winner and hc <= 10 +  X_Winner) or (hc >= 40 +  X_Winner and hc <= 50 +  X_Winner)) and (vc >= Y_Winner and vc <= 20 + Y_Winner)) or
@@ -1726,6 +1727,34 @@ begin
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
+			
+		-- Draw 5x5		
+		elsif((((hc >= X_Draw and hc <= 30 +  X_Draw) and (vc >= Y_Draw and vc <= 20 + Y_Draw)) or
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 30 +  X_Draw and hc <= 40 +  X_Draw))	and (vc >= 20 + Y_Draw and vc <= 40 + Y_Draw))  or
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 40 +  X_Draw and hc <= 50 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)		or	(hc >= 80 +  X_Draw and hc <= 90 +  X_Draw)		or	(hc >= 100 +  X_Draw and hc <= 130 +  X_Draw)	or	(hc >= 150 +  X_Draw and hc <= 160 +  X_Draw)	or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 40 + Y_Draw and vc <= 60 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 40 +  X_Draw and hc <= 50 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 80 +  X_Draw)		or	(hc >= 130 + X_Draw and hc <= 140 + X_Draw)		or	(hc >= 150 +  X_Draw and hc <= 160 +  X_Draw)	or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 60 + Y_Draw and vc <= 80 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 40 +  X_Draw and hc <= 50 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)		or	(hc >= 110 + X_Draw and hc <= 140 + X_Draw)		or	(hc >= 150 +  X_Draw and hc <= 160 +  X_Draw)	or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 80 + Y_Draw and vc <= 100 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 40 +  X_Draw and hc <= 50 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)		or	(hc >= 100 + X_Draw and hc <= 110 + X_Draw)		or	(hc >= 130 +  X_Draw and hc <= 140 +  X_Draw)	or	(hc >= 150 +  X_Draw and hc <= 160 +  X_Draw)	or	(hc >= 170 +  X_Draw and hc <= 180 +  X_Draw)	or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw))	and (vc >= 100 + Y_Draw and vc <= 120 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 30 +  X_Draw and hc <= 40 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)		or	(hc >= 100 + X_Draw and hc <= 110 + X_Draw)		or	(hc >= 130 +  X_Draw and hc <= 140 +  X_Draw)	or	(hc >= 150 +  X_Draw and hc <= 170 +  X_Draw)	or	(hc >= 180 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 120 + Y_Draw and vc <= 140 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 30 +  X_Draw) or  (hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)	or	(hc >= 110 + X_Draw and hc <= 140 + X_Draw)		or	(hc >= 150 + X_Draw and hc <= 160 + X_Draw)		or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 140 + Y_Draw and vc <= 160 + Y_Draw)))	
+			and videoON = '1' and Draw = 1 and juego9 = '0' and juego25 = '1') then
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
+			
+		-- Draw 5x5		
+		elsif((((hc >= X_Draw and hc <= 30 +  X_Draw) and (vc >= Y_Draw and vc <= 20 + Y_Draw)) or
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 30 +  X_Draw and hc <= 40 +  X_Draw))	and (vc >= 20 + Y_Draw and vc <= 40 + Y_Draw))  or
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 40 +  X_Draw and hc <= 50 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)		or	(hc >= 80 +  X_Draw and hc <= 90 +  X_Draw)		or	(hc >= 100 +  X_Draw and hc <= 130 +  X_Draw)	or	(hc >= 150 +  X_Draw and hc <= 160 +  X_Draw)	or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 40 + Y_Draw and vc <= 60 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 40 +  X_Draw and hc <= 50 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 80 +  X_Draw)		or	(hc >= 130 + X_Draw and hc <= 140 + X_Draw)		or	(hc >= 150 +  X_Draw and hc <= 160 +  X_Draw)	or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 60 + Y_Draw and vc <= 80 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 40 +  X_Draw and hc <= 50 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)		or	(hc >= 110 + X_Draw and hc <= 140 + X_Draw)		or	(hc >= 150 +  X_Draw and hc <= 160 +  X_Draw)	or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 80 + Y_Draw and vc <= 100 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 40 +  X_Draw and hc <= 50 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)		or	(hc >= 100 + X_Draw and hc <= 110 + X_Draw)		or	(hc >= 130 +  X_Draw and hc <= 140 +  X_Draw)	or	(hc >= 150 +  X_Draw and hc <= 160 +  X_Draw)	or	(hc >= 170 +  X_Draw and hc <= 180 +  X_Draw)	or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw))	and (vc >= 100 + Y_Draw and vc <= 120 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 10 +  X_Draw) or  (hc >= 30 +  X_Draw and hc <= 40 +  X_Draw)	or	(hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)		or	(hc >= 100 + X_Draw and hc <= 110 + X_Draw)		or	(hc >= 130 +  X_Draw and hc <= 140 +  X_Draw)	or	(hc >= 150 +  X_Draw and hc <= 170 +  X_Draw)	or	(hc >= 180 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 120 + Y_Draw and vc <= 140 + Y_Draw))  or 
+			(((hc >= X_Draw and hc <= 30 +  X_Draw) or  (hc >= 60 +  X_Draw and hc <= 70 +  X_Draw)	or	(hc >= 110 + X_Draw and hc <= 140 + X_Draw)		or	(hc >= 150 + X_Draw and hc <= 160 + X_Draw)		or	(hc >= 190 +  X_Draw and hc <= 200 +  X_Draw)) 	and (vc >= 140 + Y_Draw and vc <= 160 + Y_Draw)))	
+			and videoON = '1' and Draw3 = 1 and juego9 = '1' and juego25 = '0') then
+			red <= "1111";
+			blue <= "1111";
+			green <= "1111";
 		
 		elsif((hc > 290 and hc < 340 and vc > 110 and vc < 125 and videoON = '1' and juego25 = '0' and juego9 = '0')) then --horiz T line 
 			red <= "1000";		-- Purple.
@@ -2399,9 +2428,11 @@ begin
 		elsif(M2_35 = 1 and M2_45 = 1 and M2_55 = 1) then
 			Winner <= 2;
 		--Draw
-		elsif((P1_11 = 1 or P2_11 = 1) and (P1_12 = 1 or P2_12 = 1) and (P1_13 = 1 or P2_13 = 1) and
-			  (P1_21 = 1 or P2_21 = 1) and (P1_22 = 1 or P2_22 = 1) and (P1_23 = 1 or P2_23 = 1) and
-			  (P1_31 = 1 or P2_31 = 1) and (P1_32 = 1 or P2_32 = 1) and (P1_33 = 1 or P2_33 = 1)) then
+		elsif((M1_11 = 1 or M2_11 = 1) and (M1_12 = 1 or M2_12 = 1) and (M1_13 = 1 or M2_13 = 1) and (M1_14 = 1 or M2_14 = 1) and (M1_15 = 1 or M2_15 = 1) and
+			  (M1_21 = 1 or M2_21 = 1) and (M1_22 = 1 or M2_22 = 1) and (M1_23 = 1 or M2_23 = 1) and (M1_24 = 1 or M2_24 = 1) and (M1_25 = 1 or M2_25 = 1) and
+			  (M1_31 = 1 or M2_31 = 1) and (M1_32 = 1 or M2_32 = 1) and (M1_33 = 1 or M2_33 = 1) and (M1_34 = 1 or M2_34 = 1) and (M1_35 = 1 or M2_35 = 1) and
+			  (M1_41 = 1 or M2_41 = 1) and (M1_42 = 1 or M2_42 = 1) and (M1_43 = 1 or M2_43 = 1) and (M1_44 = 1 or M2_44 = 1) and (M1_45 = 1 or M2_45 = 1) and
+			  (M1_51 = 1 or M2_51 = 1) and (M1_52 = 1 or M2_52 = 1) and (M1_53 = 1 or M2_53 = 1) and (M1_54 = 1 or M2_54 = 1) and (M1_55 = 1 or M2_55 = 1)) then
 			Draw <= 1;
 		else
 			Winner	<= 0;
@@ -2420,4 +2451,3 @@ begin
 	
 	
 end Behavioral;
-
