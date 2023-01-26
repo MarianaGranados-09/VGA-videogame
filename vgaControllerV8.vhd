@@ -10,7 +10,7 @@ entity VGAControllerV1 is
 	vs  : out std_logic;
 	juego9 : in std_logic; --sw to start game with 9 spaces
 	juego25: in std_logic; --sw to start game with 25 spaces
-	--switches for directio
+	--switches for direction
 	swDown : in std_logic; --sw to choose down 
 	swRight : in std_logic; --sw to choose right
 	btnMove : in std_logic;	--sw to move 
@@ -258,7 +258,8 @@ begin
 	P2_11, P2_12, P2_13, P2_21, P2_22, P2_23, P2_31, P2_32, P2_33, X1_Cat1, X1_Cat2, X1_Cat3, Y1_Cat1, Y1_Cat2, Y1_Cat3,
 	M1_11, M1_12, M1_13, M1_14, M1_15, M1_21, M1_22, M1_23, M1_24, M1_25, M1_31, M1_32, M1_33, M1_34, M1_35, M1_41, M1_42, M1_43, M1_44, M1_45, M1_51, M1_52, M1_53, M1_54, M1_55,
 	X2_Mouse1, X2_Mouse2, X2_Mouse3, X2_Mouse4, X2_Mouse5, X2_Cat1, X2_Cat2, X2_Cat3, X2_Cat4, X2_Cat5, Y2_Mouse1, Y2_Mouse2, Y2_Mouse3, Y2_Mouse4, Y2_Mouse5, Y2_Cat1, Y2_Cat2, Y2_Cat3, Y2_Cat4, Y2_Cat5,
-	M2_11, M2_12, M2_13, M2_14, M2_15, M2_21, M2_22, M2_23, M2_24, M2_25, M2_31, M2_32, M2_33, M2_34, M2_35, M2_41, M2_42, M2_43, M2_44, M2_45, M2_51, M2_52, M2_53, M2_54, M2_55)
+	M2_11, M2_12, M2_13, M2_14, M2_15, M2_21, M2_22, M2_23, M2_24, M2_25, M2_31, M2_32, M2_33, M2_34, M2_35, M2_41, M2_42, M2_43, M2_44, M2_45, M2_51, M2_52, M2_53, M2_54, M2_55,
+	Winner, Draw, Winner3, Draw3, X_Winner, Y_Winner, X_Draw, Y_Draw, Turn5)
 	begin
 		-- Home screen borders
 		if((hc > 290 and hc < 648 and vc > 80 and vc < 100 and videoON = '1' and juego25 = '0' and juego9 = '0')) then -- Edge
@@ -848,7 +849,7 @@ begin
 			 ((hc >= 380 - 40 and hc <= 386 - 40) and (vc >= 370 and vc <= 380)) 	or
 			 ((hc >= 374 - 40 and hc <= 380 - 40) and (vc >= 380 and vc <= 390))	or
 			 ((hc >= 374 - 40 and hc <= 404 - 40) and (vc >= 390 and vc <= 400)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn ='0' and Winner = 0 and Draw = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn5 ='0' and Winner = 0 and Draw = 0) then
 			red <= "0000";
 			blue <= "0100";
 			green <= "1110";
@@ -862,7 +863,7 @@ begin
 			 ((hc >= 386 - 40 and hc <= 392 - 40) and (vc >= 370 and vc <= 380)) 	or
 			 ((hc >= 386 - 40 and hc <= 392 - 40) and (vc >= 380 and vc <= 390))	or
 			 ((hc >= 374 - 40 and hc <= 404 - 40) and (vc >= 390 and vc <= 400)))
-			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn ='1' and Winner = 0 and Draw = 0) then
+			and videoON = '1' and juego25 = '1' and juego9 = '0' and Turn5 ='1' and Winner = 0 and Draw = 0) then
 			red <= "1111";
 			blue <= "0000";
 			green <= "1111"; 
@@ -1901,7 +1902,7 @@ begin
 	Animation5x5: process(swRight, swDown, X2_Rise, Y2_Rise, btnMove, btnSelect, juego25)
 	begin
 		if(swRight = '1' and juego25 ='1') then 
-			if(X2_Rise < 375) then
+			if(X2_Rise <= 375) then
 				if(btnMove'EVENT and btnMove = '0') then
 					X2_Rise <= X2_Rise + 75;
 				else 
@@ -2440,6 +2441,7 @@ begin
 		end if;	
 	end process;
 	
+	--determinar el area visible de acuerdo a los valores de front y back porch
 	process(hc, vc)
 	begin 
 		if(((hc < hfp) and (hc > hbp)) or ((vc < vfp) and (vc > vbp))) then
