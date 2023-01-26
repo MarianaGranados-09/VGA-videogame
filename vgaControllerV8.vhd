@@ -10,7 +10,7 @@ entity VGAControllerV1 is
 	vs  : out std_logic;
 	juego9 : in std_logic; --sw to start game with 9 spaces
 	juego25: in std_logic; --sw to start game with 25 spaces
-	--switches for directio
+	--switches for direction
 	swDown : in std_logic; --sw to choose down 
 	swRight : in std_logic; --sw to choose right
 	btnMove : in std_logic;	--sw to move 
@@ -252,7 +252,6 @@ begin
 	
 	--process(start)
 	
-	--visible area is 640 - 480
 	Starting_screen: process(hc, vc, videoON, juego9, juego25, X1_Origin, Y1_Origin, X2_Origin, Y2_Origin, X1_Rise, X2_Rise, Y1_Rise, Y2_Rise, Turn, Winner, X_Winner, Y_Winner,
 	P1_11, P1_12, P1_13, P1_21, P1_22, P1_23, P1_31, P1_32, P1_33, X1_Mouse1, X1_Mouse2, X1_Mouse3, Y1_Mouse1, Y1_Mouse2, Y1_Mouse3,
 	P2_11, P2_12, P2_13, P2_21, P2_22, P2_23, P2_31, P2_32, P2_33, X1_Cat1, X1_Cat2, X1_Cat3, Y1_Cat1, Y1_Cat2, Y1_Cat3,
