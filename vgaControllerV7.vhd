@@ -10,7 +10,7 @@ entity VGAControllerV1 is
 	vs  : out std_logic;
 	juego9 : in std_logic; --sw to start game with 9 spaces
 	juego25: in std_logic; --sw to start game with 25 spaces
-	--switches for directio
+	--switches for direction
 	swDown : in std_logic; --sw to choose down 
 	swRight : in std_logic; --sw to choose right
 	btnMove : in std_logic;	--sw to move 
@@ -101,7 +101,10 @@ signal X1_Cat2 : integer := 530;
 signal Y1_Cat2 : integer := 230;
 
 signal X1_Cat3 : integer := 605;
-signal Y1_Cat3 : integer := 350;
+signal Y1_Cat3 : integer := 350;  
+
+--flag
+--signal afterSelection : integer := 0;
 
 
 										  
@@ -402,7 +405,7 @@ begin
 			blue <= "1111";
 			green <= "1111";
 		
-		-- CAT movement animation 3x3		
+		-- Cat movement animation 3x3		
 		elsif((((hc >= 33 + X1_Origin + X1_Rise and hc <= 39 + X1_Origin + X1_Rise) and (vc >= 10 + Y1_Origin + Y1_Rise and vc <= 20 + Y1_Origin + Y1_Rise)) or
 			(((hc >= 15 + X1_Origin + X1_Rise and hc <= 21 + X1_Origin + X1_Rise) or  (hc >= 33 + X1_Origin + X1_Rise and hc <= 39 + X1_Origin + X1_Rise) 	or  (hc >= 51 + X1_Origin + X1_Rise and hc <= 57 + X1_Origin + X1_Rise)) and (vc >= 20 + Y1_Origin + Y1_Rise and vc < 30 + Y1_Origin + Y1_Rise))  	or
 			(((hc >= 21 + X1_Origin + X1_Rise and hc <  33 + X1_Origin + X1_Rise) or  (hc >  39 + X1_Origin + X1_Rise and hc <= 51 + X1_Origin + X1_Rise))	and (vc >= 30 + Y1_Origin + Y1_Rise and vc <= 40 + Y1_Origin + Y1_Rise)) or 
@@ -783,7 +786,7 @@ begin
 			blue <= "0000";
 			green <= "1111";
 		
-		-- CAT movement animation 5x5		
+		-- Cat movement animation 5x5		
 		elsif((((hc >= 33 + X2_Origin + X2_Rise and hc <= 39 + X2_Origin + X2_Rise) and (vc >= 10 + Y2_Origin + Y2_Rise and vc <= 20 + Y2_Origin + Y2_Rise)) or
 			(((hc >= 15 + X2_Origin + X2_Rise and hc <= 21 + X2_Origin + X2_Rise) or  (hc >= 33 + X2_Origin + X2_Rise and hc <= 39 + X2_Origin + X2_Rise) 	or  (hc >= 51 + X2_Origin + X2_Rise and hc <= 57 + X2_Origin + X2_Rise)) and (vc >= 20 + Y2_Origin + Y2_Rise and vc < 30 + Y2_Origin + Y2_Rise))  	or
 			(((hc >= 21 + X2_Origin + X2_Rise and hc <  33 + X2_Origin + X2_Rise) or  (hc >  39 + X2_Origin + X2_Rise and hc <= 51 + X2_Origin + X2_Rise))	and (vc >= 30 + Y2_Origin + Y2_Rise and vc <= 40 + Y2_Origin + Y2_Rise)) or 
@@ -999,60 +1002,42 @@ begin
 			-- Player 1
 			if(X1_Rise = 0		and Y1_Rise = 0 	and Turn = '1' and P2_11 = 0 and P1_11 = 0) then
 				P1_11 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 0 	and Y1_Rise = 120	and Turn = '1' and P2_12 = 0 and P1_12 = 0) then
 				P1_12 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 0 	and Y1_Rise = 240	and Turn = '1' and P2_13 = 0 and P1_13 = 0) then
 				P1_13 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 75 	and Y1_Rise = 0		and Turn = '1' and P2_21 = 0 and P1_21 = 0) then
-				P1_21 <= 1;
-				Turn <= not Turn;
+				P1_21 <= 1;	
 			elsif(X1_Rise = 75 	and Y1_Rise = 120	and Turn = '1' and P2_22 = 0 and P1_22 = 0) then
 				P1_22 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 75 	and Y1_Rise = 240	and Turn = '1' and P2_23 = 0 and P1_23 = 0) then
 				P1_23 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 150 and Y1_Rise = 0		and Turn = '1' and P2_31 = 0 and P1_31 = 0) then
-				P1_31 <= 1;
-				Turn <= not Turn;
+				P1_31 <= 1;	
 			elsif(X1_Rise = 150 and Y1_Rise = 120 	and Turn = '1' and P2_32 = 0 and P1_32 = 0) then
 				P1_32 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 150 and Y1_Rise = 240 	and Turn = '1' and P2_33 = 0 and P1_33 = 0) then
-				P1_33 <= 1;
-				Turn <= not Turn;
-				
+				P1_33 <= 1;	
+
 			-- Player 2
 			elsif(X1_Rise = 0	and Y1_Rise = 0		and Turn = '0' and P1_11 = 0 and P2_11 = 0) then
 				P2_11 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 0	and Y1_Rise = 120	and Turn = '0' and P1_12 = 0 and P2_12 = 0) then
 				P2_12 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 0	and Y1_Rise = 240	and Turn = '0' and P1_13 = 0 and P2_13 = 0) then
 				P2_13 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 75	and Y1_Rise = 0		and Turn = '0' and P1_21 = 0 and P2_21 = 0) then
 				P2_21 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 75	and Y1_Rise = 120 	and Turn = '0' and P1_22 = 0 and P2_22 = 0) then
 				P2_22 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 75	and Y1_Rise = 240 	and Turn = '0' and P1_23 = 0 and P2_23 = 0) then
 				P2_23 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 150 and Y1_Rise = 0 	and Turn = '0' and P1_31 = 0 and P2_31 = 0) then
 				P2_31 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 150 and Y1_Rise = 120 	and Turn = '0' and P1_32 = 0 and P2_32 = 0) then
 				P2_32 <= 1;
-				Turn <= not Turn;
 			elsif(X1_Rise = 150 and Y1_Rise = 240 	and Turn = '0' and P1_33 = 0 and P2_33 = 0) then
 				P2_33 <= 1;
-				Turn <= not Turn;
 			else
 				-- Player 1 3x3
 				P1_11 <= P1_11;
@@ -1074,61 +1059,79 @@ begin
 				P2_31 <= P2_31;
 				P2_32 <= P2_32;
 				P2_33 <= P2_33;
-				
-				-- Turn
-				Turn <= Turn;
 			end if;
 		end if;
-	end process;
-	
-	Combination3x3: process(btnSelect, P1_11, P1_12, P1_13, P1_21, P1_22, P1_23, P1_31, P1_32, P1_33, P2_11, P2_12, P2_13, P2_21, P2_22, P2_23, P2_31, P2_32, P2_33)
-	begin
+		
 		if(btnSelect'EVENT and btnSelect = '0')then
+			Turn <= not Turn;
+		else
+			Turn <= Turn;
+		end if;
+	end process;
+		
+	Combination3x3: process(P1_11, P1_12, P1_13, P1_21, P1_22, P1_23, P1_31, P1_32, P1_33, P2_11, P2_12, P2_13, P2_21, P2_22, P2_23, P2_31, P2_32, P2_33)
+	begin
 			-- Player 1
 			if(P1_11 = 1 and P1_12 = 1 and P1_13 = 1) then
 				Winner <= 1;
+				
 			elsif(P1_21 = 1 and P1_22 = 1 and P1_23 = 1) then
 				Winner <= 1;
+				
 			elsif(P1_31 = 1 and P1_32 = 1 and P1_33 = 1) then
-				Winner <= 1;
+				Winner <= 1; 
+				
 			elsif(P1_11 = 1 and P1_21 = 1 and P1_31 = 1) then
 				Winner <= 1;
+				
 			elsif(P1_12 = 1 and P1_22 = 1 and P1_32 = 1) then
 				Winner <= 1;
+				
 			elsif(P1_13 = 1 and P1_23 = 1 and P1_33 = 1) then
 				Winner <= 1;
+				
 			elsif(P1_11 = 1 and P1_22 = 1 and P1_33 = 1) then
 				Winner <= 1;
+				
 			elsif(P1_13 = 1 and P1_22 = 1 and P1_31 = 1) then
 				Winner <= 1;
+				
 				
 			-- Player 2
 			elsif(P2_11 = 1 and P2_12 = 1 and P2_13 = 1) then
 				Winner <= 2;
+				
 			elsif(P2_21 = 1 and P2_22 = 1 and P2_23 = 1) then
 				Winner <= 2;
+				
 			elsif(P2_31 = 1 and P2_32 = 1 and P2_33 = 1) then
 				Winner <= 2;
+				
 			elsif(P2_11 = 1 and P2_21 = 1 and P2_31 = 1) then
 				Winner <= 2;
+				
 			elsif(P2_12 = 1 and P2_22 = 1 and P2_32 = 1) then
 				Winner <= 2;
+				
 			elsif(P2_13 = 1 and P2_23 = 1 and P2_33 = 1) then
 				Winner <= 2;
+				
 			elsif(P2_11 = 1 and P2_22 = 1 and P2_33 = 1) then
-				Winner <= 2;
+				Winner <= 2; 
+				
 			elsif(P2_13 = 1 and P2_22 = 1 and P2_31 = 1) then
 				Winner <= 2;
+				
 			--Draw
 			elsif((P1_11 = 1 or P2_11 = 1) and (P1_12 = 1 or P2_12 = 1) and (P1_13 = 1 or P2_13 = 1) and
 				  (P1_21 = 1 or P2_21 = 1) and (P1_22 = 1 or P2_22 = 1) and (P1_23 = 1 or P2_23 = 1) and
 				  (P1_31 = 1 or P2_31 = 1) and (P1_32 = 1 or P2_32 = 1) and (P1_33 = 1 or P2_33 = 1)) then
 				Draw <= 1;
+				
 			else
-				Winner	<= Winner;
-				Draw	<= Draw;
+				Winner	<= 0;
+				Draw	<= 0;
 			end if;	
-		end if;
 	end process;
 	
 	process(hc, vc)
